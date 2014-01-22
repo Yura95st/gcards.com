@@ -1355,7 +1355,7 @@ class CI_DB_driver {
 					$parts[$i] = $this->dbprefix.$parts[$i];
 				}
 
-				// Put the parts back together
+				// Put the templates back together
 				$item = implode('.', $parts);
 			}
 
