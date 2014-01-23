@@ -29,6 +29,7 @@ class Card_Controller extends CI_Controller
     {
         if ($cardHashCode == null) {
             //Card not found
+            echo "Card not found";
             show_404();
             return;
         }
@@ -39,6 +40,7 @@ class Card_Controller extends CI_Controller
 
         if ($card == null) {
             //Card not found
+            echo "Card not found";
             show_404();
             return;
         }
