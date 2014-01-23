@@ -9,19 +9,14 @@ class Position
     private $height;
     private $width;
 
-    public function __construct($x, $y, $height, $width)
+    public function __construct()
     {
-        $this->x = $x;
-        $this->y = $y;
-        $this->height = $height;
-        $this->width = $width;
     }
 
     public function setHeight($height)
     {
-        $height = (int) $height;
-        if ($height >= 0)
-        {
+        $height = (int)$height;
+        if ($height >= 0) {
             $this->height = $height;
         }
     }
@@ -33,9 +28,8 @@ class Position
 
     public function setWidth($width)
     {
-        $width = (int) $width;
-        if ($width >= 0)
-        {
+        $width = (int)$width;
+        if ($width >= 0) {
             $this->width = $width;
         }
     }
@@ -47,9 +41,8 @@ class Position
 
     public function setX($x)
     {
-        $x = (int) $x;
-        if ($x >= 0)
-        {
+        $x = (int)$x;
+        if ($x >= 0) {
             $this->x = $x;
         }
     }
@@ -61,9 +54,8 @@ class Position
 
     public function setY($y)
     {
-        $y = (int) $y;
-        if ($y >= 0)
-        {
+        $y = (int)$y;
+        if ($y >= 0) {
             $this->y = $y;
         }
     }
@@ -71,5 +63,35 @@ class Position
     public function getY()
     {
         return $this->y;
+    }
+
+    public function fromJSON($jsonString)
+    {
+        $position = json_decode($jsonString, true);
+
+        $this->x = $position['x'];
+        $this->y = $position['y'];
+        $this->height = $position['height'];
+        $this->width = $position['width'];
+    }
+
+    public function toJSON()
+    {
+        $array = array(
+            'x' => $this->x,
+            'y' => $this->y,
+            'height' => $this->height,
+            'width' => $this->width
+        );
+
+        return json_encode($array);
+    }
+
+    public function toString()
+    {
+        return " top: " . $this->x . "px ;" .
+        " left: " . $this->y . "px ;" .
+        " height: " . $this->height . "px ;" .
+        " width: " . $this->width . "px ;";
     }
 }

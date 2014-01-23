@@ -7,20 +7,13 @@ class Size
     private $type;
     private $value;
 
-    public function __construct($type, $value)
+    public function __construct()
     {
-        parent::__construct();
-
-        $this->type = $type;
-        $this->value = $value;
     }
 
     public function setType($type)
     {
-        if (in_array($type, $this->resources->size_type))
-        {
-            $this->type = $type;
-        }
+        $this->type = $type;
     }
 
     public function getType()
@@ -41,4 +34,27 @@ class Size
     {
         return $this->value;
     }
-} 
+
+    public function fromJSON($jsonString)
+    {
+        $size = json_decode($jsonString, true);
+
+        $this->type = $size['type'];
+        $this->value = $size['value'];
+    }
+
+    public function toJSON()
+    {
+        $array = array (
+            'type' =>  $this->type,
+            'value' => $this->value
+        );
+
+        return json_encode($array);
+    }
+
+    public function toString()
+    {
+        return $this->value.$this->type;
+    }
+}

@@ -9,12 +9,18 @@ class Block
     private $position;
     private $text;
 
-    public function __construct($id, $font, $position, $text)
+    public function __construct()
+    {
+    }
+
+    public function setId($id)
     {
         $this->id = $id;
-        $this->font = $font;
-        $this->position = $position;
-        $this->text = $text;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function setFont($font)
@@ -25,11 +31,6 @@ class Block
     public function getFont()
     {
         return $this->font;
-    }
-
-    public function getId()
-    {
-        return $this->id;
     }
 
     public function setPosition($position)
@@ -54,6 +55,6 @@ class Block
 
     public function getStyle()
     {
-        return "";
+        return $this->font->toString()." ".$this->position->toString();
     }
-} 
+}
