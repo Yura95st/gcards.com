@@ -4,8 +4,8 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Size
 {
-    private $type;
-    private $value;
+    private $type = "px";
+    private $value = "0";
 
     public function __construct()
     {
@@ -23,7 +23,6 @@ class Size
 
     public function setValue($value)
     {
-        $value = (int) $value;
         if($value > 0)
         {
             $this->value = $value;
@@ -35,12 +34,18 @@ class Size
         return $this->value;
     }
 
+    public function fromArray($size)
+    {
+        if ($size != null) {
+            $this->setType($size['type']);
+            $this->setValue($size['value']);
+        }
+    }
+
     public function fromJSON($jsonString)
     {
         $size = json_decode($jsonString, true);
-
-        $this->type = $size['type'];
-        $this->value = $size['value'];
+        $this->fromArray($size);
     }
 
     public function toJSON()

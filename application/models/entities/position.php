@@ -2,12 +2,14 @@
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once(APPPATH . 'models/resources/fields_names.php');
+
 class Position
 {
-    private $x;
-    private $y;
-    private $height;
-    private $width;
+    private $x = 0;
+    private $y = 0;
+    private $height = 0;
+    private $width = 0;
 
     public function __construct()
     {
@@ -15,7 +17,6 @@ class Position
 
     public function setHeight($height)
     {
-        $height = (int)$height;
         if ($height >= 0) {
             $this->height = $height;
         }
@@ -28,7 +29,6 @@ class Position
 
     public function setWidth($width)
     {
-        $width = (int)$width;
         if ($width >= 0) {
             $this->width = $width;
         }
@@ -41,7 +41,6 @@ class Position
 
     public function setX($x)
     {
-        $x = (int)$x;
         if ($x >= 0) {
             $this->x = $x;
         }
@@ -54,7 +53,6 @@ class Position
 
     public function setY($y)
     {
-        $y = (int)$y;
         if ($y >= 0) {
             $this->y = $y;
         }
@@ -65,23 +63,29 @@ class Position
         return $this->y;
     }
 
+    public function fromArray($position)
+    {
+        if ($position != null) {
+            $this->setX($position[FieldsNames::$JSON_POSITION_X]);
+            $this->setY($position[FieldsNames::$JSON_POSITION_Y]);
+            $this->setHeight($position[FieldsNames::$JSON_POSITION_HEIGHT]);
+            $this->setWidth($position[FieldsNames::$JSON_POSITION_WIDTH]);
+        }
+    }
+
     public function fromJSON($jsonString)
     {
         $position = json_decode($jsonString, true);
-
-        $this->x = $position['x'];
-        $this->y = $position['y'];
-        $this->height = $position['height'];
-        $this->width = $position['width'];
+        $this->fromArray($position);
     }
 
     public function toJSON()
     {
         $array = array(
-            'x' => $this->x,
-            'y' => $this->y,
-            'height' => $this->height,
-            'width' => $this->width
+            FieldsNames::$JSON_POSITION_X => $this->x,
+            FieldsNames::$JSON_POSITION_Y => $this->y,
+            FieldsNames::$JSON_POSITION_HEIGHT => $this->height,
+            FieldsNames::$JSON_POSITION_WIDTH => $this->width
         );
 
         return json_encode($array);

@@ -6,14 +6,15 @@ require_once(APPPATH . 'models/entities/size.php');
 
 class Font
 {
-    private $color;
-    private $weight;
-    private $style;
-    private $family;
-    private $size;
+    private $color = "#000000";
+    private $weight = "normal";
+    private $style = "";
+    private $family = "arial";
+    private $size = null;
 
     function __construct()
     {
+        $this->size = new Size();
     }
 
     public function setColor($color)
@@ -28,9 +29,10 @@ class Font
 
     public function setFamily($family)
     {
-        if (in_array($family, $this->resources->font_family)) {
-            $this->family = $family;
-        }
+        //TODO: data validation
+        //if (in_array($family, $this->resources->font_family)) {
+        $this->family = $family;
+        //}
     }
 
     public function getFamily()
@@ -40,9 +42,7 @@ class Font
 
     public function setSize($size)
     {
-        $size = (int)$size;
-
-        if ($size > 0) {
+        if ($size != null) {
             $this->size = $size;
         }
     }
@@ -54,9 +54,10 @@ class Font
 
     public function setStyle($style)
     {
-        if (in_array($style, $this->resources->font_style)) {
-            $this->style = $style;
-        }
+        //TODO: data validation
+        //if (in_array($style, $this->resources->font_style)) {
+        $this->style = $style;
+        //}
     }
 
     public function getStyle()
@@ -66,9 +67,10 @@ class Font
 
     public function setWeight($weight)
     {
-        if (in_array($weight, $this->resources->font_style)) {
-            $this->weight = $weight;
-        }
+        //TODO: data validation
+        //if (in_array($weight, $this->resources->font_style)) {
+        $this->weight = $weight;
+        //}
     }
 
     public function getWeight()
@@ -76,19 +78,24 @@ class Font
         return $this->weight;
     }
 
+    public function fromArray($font)
+    {
+        if ($font != null) {
+            $this->setColor($font['color']);
+            $this->setWeight($font['weight']);
+            $this->setSize($font['style']);
+            $this->setFamily($font['family']);
+
+            $size = new Size();
+            $size->fromArray($font['size']);
+            $this->setSize($size);
+        }
+    }
+
     public function fromJSON($jsonString)
     {
         $font = json_decode($jsonString, true);
-
-        $this->color = $font['color'];
-        $this->weight = $font['weight'];
-        $this->style = $font['style'];
-        $this->family = $font['family'];
-
-        $size = new Size();
-        $size->setType($font['size']['type']);
-        $size->setValue($font['size']['value']);
-        $this->size = $size;
+        $this->fromArray($font);
     }
 
     public function toJSON()
@@ -114,10 +121,10 @@ class Font
 
         if ($named) {
 
-            if (in_array(strtolower($color), $this->resources->color_named)) {
-                /* A color name was entered instead of a Hex Value, so just exit function */
-                return $color;
-            }
+            //if (in_array(strtolower($color), $this->resources->color_named)) {
+            /* A color name was entered instead of a Hex Value, so just exit function */
+            return $color;
+            //}
         }
 
         if (preg_match('/^#[a-f0-9]{6}$/i', $color)) {
