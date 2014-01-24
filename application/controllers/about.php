@@ -4,6 +4,13 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class About extends CI_Controller
 {
+    function __construct()
+    {
+        //Call the Controller constructor
+        parent::__construct();
+
+        $this->output->enable_profiler(TRUE);
+    }
 
     public function index()
     {
