@@ -2,7 +2,7 @@
   <profile version="1.0" is_locked="false">
     <option name="myName" value="Project Default" />
     <option name="myLocal" value="false" />
-    <inspection_tool class="PhpCSValidationInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+    <inspection_tool class="PhpCSValidationInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false">
       <option name="CODING_STANDARD" value="Custom" />
       <option name="CUSTOM_RULESET_PATH" value="/Applications/MAMP/bin/php/php5.5.3/modules/PHP_CodeSniffer-1.5.1/PHP_CodeSniffer-1.5.1/CodeSniffer/Standards/PEAR" />
     </inspection_tool>
