@@ -3,6 +3,7 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 require_once(APPPATH . 'models/resources/fields_names.php');
+require_once(APPPATH . 'libraries/validation.php');
 require_once(APPPATH . 'models/entities/cover.php');
 
 class Cover_Processor extends CI_Model
@@ -21,7 +22,8 @@ class Cover_Processor extends CI_Model
     {
         $cover = null;
 
-        if ($coverId != null) {
+        // coverId int value is in range of : min = 1, max = 999999
+        if (Validation::isInteger($coverId, 1, 999999)) {
             $sql = " SELECT " . FieldsNames::$COVERS_ID . "," . FieldsNames::$COVERS_PARTITION_ID . "," .
                 FieldsNames::$COVERS_PATH_ORIGINAL . "," . FieldsNames::$COVERS_PATH_MINI . "," .
                 FieldsNames::$COVERS_VISIBLE_TO_ALL .
@@ -46,7 +48,8 @@ class Cover_Processor extends CI_Model
      */
     public function getCovers($coversIdArray)
     {
-        if ($coversIdArray == null || sizeof($coversIdArray) == 0) {
+        if ($coversIdArray == null || sizeof($coversIdArray) == 0
+            || !Validation::arrayHasOnlyIntegers($coversIdArray)) {
             return array();
         }
 

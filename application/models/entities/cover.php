@@ -18,7 +18,9 @@ class Cover
      */
     public function setId($id)
     {
-        $this->id = $id;
+        if (Validation::isInteger($id, 0)) {
+            $this->id = $id;
+        }
     }
 
     /**
@@ -34,6 +36,7 @@ class Cover
      */
     public function setPathMini($pathMini)
     {
+        //TODO: validation data
         $this->pathMini = $pathMini;
     }
 
@@ -50,6 +53,7 @@ class Cover
      */
     public function setPathOriginal($pathOriginal)
     {
+        //TODO: validation data
         $this->pathOriginal = $pathOriginal;
     }
 
@@ -66,7 +70,9 @@ class Cover
      */
     public function setVisibleToAll($visibleToAll)
     {
-        $this->visibleToAll = $visibleToAll;
+        if ($visibleToAll == 0 || $visibleToAll == 1) {
+            $this->visibleToAll = $visibleToAll;
+        }
     }
 
     /**
@@ -75,5 +81,14 @@ class Cover
     public function getVisibleToAll()
     {
         return $this->visibleToAll;
+    }
+
+    public function isDefault()
+    {
+        if ($this->id == 0 && $this->pathOriginal == "" && $this->pathMini == "" && $this->visibleToAll == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 } 

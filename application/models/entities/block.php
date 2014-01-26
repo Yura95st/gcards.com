@@ -3,41 +3,29 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 require_once(APPPATH . 'models/resources/fields_names.php');
+require_once(APPPATH . 'libraries/validation.php');
 
 class Block
 {
     private $id = 0;
-    private $font = null;
     private $position = null;
     private $content = "";
 
     public function __construct()
     {
-        $this->font = new Font();
         $this->position = new Position();
     }
 
     public function setId($id)
     {
-        //TODO: data validation
-        $this->id = $id;
+        if (Validation::isInteger($id, 0)) {
+            $this->id = $id;
+        }
     }
 
     public function getId()
     {
         return $this->id;
-    }
-
-    public function setFont($font)
-    {
-        if ($font != null) {
-            $this->font = $font;
-        }
-    }
-
-    public function getFont()
-    {
-        return $this->font;
     }
 
     public function setPosition($position)
@@ -52,10 +40,13 @@ class Block
         return $this->position;
     }
 
-    public function setContent($text)
+    public function setContent($content)
     {
-        //TODO: data validation
-        $this->content = $text;
+        if ($content != null) {
+            //No longer, than 10000 chars
+            $content = substr($content, 0, 10000);
+            $this->content = html_escape($content);
+        }
     }
 
     public function getContent()
@@ -65,19 +56,30 @@ class Block
 
     public function getStyle()
     {
-        return $this->font->toString() . " " . $this->position->toString();
+        return $this->position->toString();
     }
 
     public function fromArray($block)
     {
-        $this->setContent($block[FieldsNames::$BLOCKS_CONTENT]);
+        if ($block != null) {
+            if (isset($block[FieldsNames::$BLOCKS_CONTENT])) {
+                $this->setContent($block[FieldsNames::$BLOCKS_CONTENT]);
+            }
 
-        $font = new Font();
-        $font->fromArray($block['font']);
-        $this->setFont($font);
+            if (isset($block[FieldsNames::$BLOCKS_POSITION])) {
+                $position = new Position();
+                $position->fromArray($block[FieldsNames::$BLOCKS_POSITION]);
+                $this->setPosition($position);
+            }
+        }
+    }
 
-        $position = new Position();
-        $position->fromArray($block[FieldsNames::$BLOCKS_POSITION]);
-        $this->setPosition($position);
+    public function isDefault()
+    {
+        if ($this->id == 0 && ($this->content == "" || $this->position->isDefault())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

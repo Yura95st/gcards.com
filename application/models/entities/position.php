@@ -66,10 +66,21 @@ class Position
     public function fromArray($position)
     {
         if ($position != null) {
-            $this->setX($position[FieldsNames::$JSON_POSITION_X]);
-            $this->setY($position[FieldsNames::$JSON_POSITION_Y]);
-            $this->setHeight($position[FieldsNames::$JSON_POSITION_HEIGHT]);
-            $this->setWidth($position[FieldsNames::$JSON_POSITION_WIDTH]);
+            if (isset($position[FieldsNames::$JSON_POSITION_X])) {
+                $this->setX($position[FieldsNames::$JSON_POSITION_X]);
+            }
+
+            if (isset($position[FieldsNames::$JSON_POSITION_Y])) {
+                $this->setY($position[FieldsNames::$JSON_POSITION_Y]);
+            }
+
+            if (isset($position[FieldsNames::$JSON_POSITION_HEIGHT])) {
+                $this->setHeight($position[FieldsNames::$JSON_POSITION_HEIGHT]);
+            }
+
+            if (isset($position[FieldsNames::$JSON_POSITION_WIDTH])) {
+                $this->setWidth($position[FieldsNames::$JSON_POSITION_WIDTH]);
+            }
         }
     }
 
@@ -93,9 +104,18 @@ class Position
 
     public function toString()
     {
-        return " top: " . $this->x . "px ;" .
-        " left: " . $this->y . "px ;" .
+        return " left: " . $this->x . "px ;" .
+        " top: " . $this->y . "px ;" .
         " height: " . $this->height . "px ;" .
         " width: " . $this->width . "px ;";
+    }
+
+    public function isDefault()
+    {
+        if ($this->x == 0 && $this->y == 0 && $this->height == 0 && $this->width == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

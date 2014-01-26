@@ -3,10 +3,10 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 require_once(APPPATH . 'models/resources/fields_names.php');
+require_once(APPPATH . 'libraries/validation.php');
 
 require_once(APPPATH . 'models/entities/card.php');
 require_once(APPPATH . 'models/entities/block.php');
-require_once(APPPATH . 'models/entities/font.php');
 require_once(APPPATH . 'models/entities/position.php');
 
 class Card_Processor extends CI_Model
@@ -24,6 +24,9 @@ class Card_Processor extends CI_Model
         if ($hashCode == null) {
             return null;
         }
+
+        //No longer, than 255 chars
+        $hashCode = substr($hashCode, 0, 255);
 
         $card = null;
 
@@ -51,8 +54,13 @@ class Card_Processor extends CI_Model
     {
         $blocks = array();
 
-        //Get all blocks, associated with card
-        $sql = " SELECT " . FieldsNames::$BLOCKS_ID . "," . FieldsNames::$BLOCKS_FONT . "," .
+        if ($blocksIdArray == null || sizeof($blocksIdArray) == 0
+            || !Validation::arrayHasOnlyIntegers($blocksIdArray)) {
+            return array();
+        }
+
+        //Get all block, associated with card
+        $sql = " SELECT " . FieldsNames::$BLOCKS_ID . "," .
             FieldsNames::$BLOCKS_POSITION . "," . FieldsNames::$BLOCKS_CONTENT .
             " FROM " . FieldsNames::$BLOCKS_TABLE .
             " WHERE " . FieldsNames::$BLOCKS_ID . " IN (" . $blocksIdArray . ")";
@@ -65,10 +73,6 @@ class Card_Processor extends CI_Model
 
                 $block->setId($row[FieldsNames::$BLOCKS_ID]);
                 $block->setContent($row[FieldsNames::$BLOCKS_CONTENT]);
-
-                $font = new Font();
-                $font->fromJSON($row[FieldsNames::$BLOCKS_FONT]);
-                $block->setFont($font);
 
                 $position = new Position();
                 $position->fromJSON($row[FieldsNames::$BLOCKS_POSITION]);
@@ -83,11 +87,11 @@ class Card_Processor extends CI_Model
 
     public function publishCard($card)
     {
-        if ($card == null) {
+        if ($card == null || $card->isDefault()) {
             return false;
         }
 
-        //Publish blocks of the card
+        //Publish block of the card
         $result = $this->publishBlocks($card->getBlocks());
 
         if ($result == false) {
@@ -120,7 +124,6 @@ class Card_Processor extends CI_Model
 
         foreach ($blocks as $block) {
             array_push($data, array(
-                FieldsNames::$BLOCKS_FONT => $block->getFont()->toJSON(),
                 FieldsNames::$BLOCKS_POSITION => $block->getPosition()->toJSON(),
                 FieldsNames::$BLOCKS_CONTENT => $block->getContent()
             ));
@@ -132,7 +135,7 @@ class Card_Processor extends CI_Model
             return false;
         }
 
-        //Associate blocks with their id in the database
+        //Associate block with their id in the database
         $first_insert_id = $this->db->insert_id();
 
         foreach ($blocks as $block) {
