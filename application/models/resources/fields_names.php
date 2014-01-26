@@ -14,7 +14,6 @@ class FieldsNames
     //Blocks table values
     public static $BLOCKS_TABLE = "blocks";
     public static $BLOCKS_ID = "block_id";
-    public static $BLOCKS_FONT = "font";
     public static $BLOCKS_POSITION = "position";
     public static $BLOCKS_CONTENT = "content";
 
@@ -40,5 +39,5 @@ class FieldsNames
 
     //JSON Card fields
     public static $JSON_CARDS_BLOCKS = "blocks";
-    public static $JSON_CARDS_COVER_ID = "cover_id";
+    public static $JSON_CARDS_COVER_ID = "coverId";
 }
