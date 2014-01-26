@@ -7,7 +7,7 @@
         <li><a href="<?php echo base_url(); ?>about"><?php echo $menu_about; ?></a></li>
     </ul>
 
-    <div style="float: right;">
+    <div class="action_bar">
         <ul class="social_bar">
             <li>
                 <a href="#" onclick="share(1); return false;" title="Facebook">
@@ -25,45 +25,16 @@
                 </a>
             </li>
         </ul>
-        <div onclick="User.showFeedbackBox();" id="feedback_panel"><?php echo $menu_send_feedback; ?></div>
+        <div id="problem_button" onclick="User.showFeedbackBox();"><?php echo $menu_send_feedback; ?></div>
     </div>
 </div>
 
-<div id="modal_mask"></div>
-
-<div id="modal_box"></div>
-
-<div id="message_box_absolute">
-    <div id="inner_message"></div>
-</div>
-
+<script type='text/javascript' src='<?php echo base_url(); ?>js/knockout-3.0.0.js'></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-<script src="/js/classes/user_class.js"></script>
-<script src="/js/classes/modal_class.js"></script>
-<script src="/js/useful_functions.js"></script>
-<script type="text/javascript">
-function share(i) {
-    var array = ['http://vk.com/share.php?url=', 'http://www.facebook.com/sharer.php?u=', 'http://twitter.com/share?url=', 'https://plus.google.com/share?url=']
-    var url = '<?php echo SITE_URL; ?>/';
-    var width = 800;
-    var height = 500;
-    var leftPx = ( screen.availWidth - width ) / 2;
-    var topPx = ( screen.availHeight - height ) / 2;
-    var params = "width=" +width+ ", height=" +height+ ", resizable=yes, scrollbars=yes, top=" +topPx+ ", left=" +leftPx;
-    
-    window.open(array[i]+url, '', params);
-    return false;
-}
-</script>
 
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-37356643-1']);
-  _gaq.push(['_trackPageview']);
+<script src="<?php echo base_url(); ?>/js/classes/models/position.js"></script>
+<script src="<?php echo base_url(); ?>/js/classes/models/block.js"></script>
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
+<script src="<?php echo base_url(); ?>/js/data.js"></script>
+<script src="<?php echo base_url(); ?>/js/classes/view_models/card_view_model.js"></script>
+<script src="<?php echo base_url(); ?>/js/classes/processors/card_processor.js"></script>
