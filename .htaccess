@@ -10,6 +10,36 @@
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^(.*)$ index.php?/$1 [L]
+
+
+  #Default charset
+  AddDefaultCharset UTF-8
+
+  #Site some security issues
+  Options +FollowSymLinks
+
+  RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+  RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+  RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+  RewriteRule ^(.*)$ /index.php [F,L]
+
+  #Block bots and robots
+  SetEnvIfNoCase user-Agent ^FrontPage [NC,OR]
+  SetEnvIfNoCase user-Agent ^Java.* [NC,OR]
+  SetEnvIfNoCase user-Agent ^Microsoft.URL [NC,OR]
+  SetEnvIfNoCase user-Agent ^MSFrontPage [NC,OR]
+  SetEnvIfNoCase user-Agent ^Offline.Explorer [NC,OR]
+  SetEnvIfNoCase user-Agent ^[Ww]eb[Bb]andit [NC,OR]
+  SetEnvIfNoCase user-Agent ^Zeus [NC]
+  <limit get="" post="" head="">
+    Order Allow,Deny
+    Allow from all
+    Deny from env=bad_bot
+  </limit>
+
+  #Session variable name in Cookies
+  php_value session.name sid
+
 </IfModule>
  
 <IfModule !mod_rewrite.c>
