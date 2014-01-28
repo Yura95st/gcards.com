@@ -21,6 +21,8 @@ class Card_Controller extends CI_Controller
         $this->load->view('templates/meta');
         $this->load->view('templates/header');
 
+        $this->load->view('templates/toolbar');
+
         //Get random cover
         $cover = $this->cover_processor->getCover(1);
         $path = "";

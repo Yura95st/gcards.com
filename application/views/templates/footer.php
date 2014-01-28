@@ -29,12 +29,16 @@
     </div>
 </div>
 
-<script type='text/javascript' src='<?php echo base_url(); ?>js/knockout-3.0.0.js'></script>
-<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script type='text/javascript' src='<?php echo base_url(); ?>js/libraries/knockout-3.0.0.js'></script>
+<script type='text/javascript' src='http://code.jquery.com/ui/1.9.2/jquery-ui.js'></script>
+<script type='text/javascript' src='http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js'></script>
 
-<script src="<?php echo base_url(); ?>/js/classes/models/position.js"></script>
-<script src="<?php echo base_url(); ?>/js/classes/models/block.js"></script>
+<script type='text/javascript' src='<?php echo base_url(); ?>js/libraries/summernote.js'></script>
 
-<script src="<?php echo base_url(); ?>/js/data.js"></script>
-<script src="<?php echo base_url(); ?>/js/classes/view_models/card_view_model.js"></script>
-<script src="<?php echo base_url(); ?>/js/classes/processors/card_processor.js"></script>
+<script type='text/javascript' src='<?php echo base_url(); ?>js/classes/models/position.js'></script>
+<script type='text/javascript' src='<?php echo base_url(); ?>js/classes/models/block.js'></script>
+<script type='text/javascript' src='<?php echo base_url(); ?>js/classes/models/data.js'></script>
+
+
+<script type='text/javascript' src='<?php echo base_url(); ?>js/classes/view_models/card_view_model.js'></script>
+<script type='text/javascript' src='<?php echo base_url(); ?>js/classes/processors/card_processor.js'></script>

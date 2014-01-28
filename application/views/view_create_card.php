@@ -1,19 +1,14 @@
-<div id="body-container">
-    <div id="card_background">
-        <img id="card_background_img" src="<?php echo $img; ?>" height="100%" width="100%"/>
+<div class="main-body">
+    <div class="card-cover">
+        <img src="<?php echo $path; ?>"/>
     </div>
-    <div id="card_caption_container" class="card_parts">
-        <div id="card_caption" class="card_text_areas">Текст заголовка...</div>
-    </div>
-    <div id="card_text_container" class="card_parts">
-        <div id="card_text" class="card_text_areas">Основной текст...</div>
-    </div>
-    <div id="card_signature_container" class="card_parts">
-        <div id="card_signature" class="card_text_areas">Подпись...</div>
+
+    <div data-bind="foreach: { data: blocks, as: 'block' }">
+        <div class="card-block" data-bind="style { top: block.position.y() + 'px', left: block.position.x() + 'px', height: block.position.height() + 'px', width: block.position.width() + 'px'}, blocksDraggableResizable {}, blockDoubleClick {}">
+            <div class="block-content" data-bind='text: block.content'></div>
+        </div>
     </div>
 
 </div>
-<script src="/js/jquery.minicolors.js"></script>
-<script src="/js/data_storage.js"></script>
-<script src="/js/elements_init.js"></script>
-<script src="/js/classes/card_class.js"></script>
+
+<textarea data-bind='value: lastSavedJson' rows='5' cols='60' disabled='disabled'> </textarea>
