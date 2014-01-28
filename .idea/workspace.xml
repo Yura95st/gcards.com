@@ -5,25 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list id="c6e25de8-a182-4934-8c9e-b16d542982c7" name="Default" comment="added publish() method to card_controller and necessary methods for this action to card_processor&#10;&#10;added lang values" />
-    <list id="6f128581-f8e2-4553-aae4-983b9d0f82d4" name="Card-back_end " comment="Card-back_end">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/resources.php" afterPath="$PROJECT_DIR$/application/models/resources.php" />
-    </list>
-    <list id="7fb7ef55-0277-494d-b1e3-0dc051a9576b" name="Card-front_end" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/classes/view_models/card_view_model.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/frameworkRootSettings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/summernote.css" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/classes/modal_class.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/classes/user_class.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/main.css" afterPath="$PROJECT_DIR$/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list id="6f128581-f8e2-4553-aae4-983b9d0f82d4" name="Card-back_end " comment="Card-back_end" />
     <list default="true" id="061c1a3c-d0a9-497a-841c-f584b0a0ec1b" name="Card_view" comment="Added toolbar">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/application/models/resources.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/js/classes/card_class.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="gcards.com.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="$PROJECT_DIR$/js/data.js" ignored="true" />
-    <file path="$PROJECT_DIR$/js/classes/view_models/card_view_model.js" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,6 +197,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gcards.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gcards.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -296,7 +304,7 @@
     <task active="true" id="Default" summary="Default task">
       <changelist id="c6e25de8-a182-4934-8c9e-b16d542982c7" name="Default" comment="" />
       <changelist id="6f128581-f8e2-4553-aae4-983b9d0f82d4" name="Card-back_end " comment="" />
-      <changelist id="7fb7ef55-0277-494d-b1e3-0dc051a9576b" name="Card-front_end" comment="" />
+      <changelist id="" name="Card-front_end" comment="" />
       <changelist id="" name="Card-view" comment="" />
       <changelist id="061c1a3c-d0a9-497a-841c-f584b0a0ec1b" name="Card_view" comment="" />
       <created>1388605687691</created>
@@ -386,7 +394,11 @@
       <created>1390951133405</created>
       <updated>1390951133405</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Added card_view_model, based on knockout framework.">
+      <created>1390951286027</created>
+      <updated>1390951286027</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -471,7 +483,8 @@
     <MESSAGE value="Added toolbar" />
     <MESSAGE value="Added js models: data, position, block" />
     <MESSAGE value="Added knockout and summernote libraries." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added knockout and summernote libraries." />
+    <MESSAGE value="Added card_view_model, based on knockout framework." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added card_view_model, based on knockout framework." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -568,11 +581,6 @@
     <entry file="file://$PROJECT_DIR$/js/libraries/knockout-3.0.0.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="491" selection-start="1173" selection-end="1173" vertical-scroll-proportion="0.31050956" vertical-offset="0" max-vertical-offset="7798" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/resources.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="1" selection-start="109" selection-end="109" vertical-scroll-proportion="0.12376238" vertical-offset="0" max-vertical-offset="1401" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/libraries/validation.php">
@@ -770,6 +778,13 @@
     <entry file="file://$PROJECT_DIR$/js/useful_functions.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="1" selection-start="24" selection-end="24" vertical-scroll-proportion="0.02388535" vertical-offset="0" max-vertical-offset="1513">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/resources.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="1" selection-start="109" selection-end="109" vertical-scroll-proportion="0.12417219" vertical-offset="0" max-vertical-offset="1399">
           <folding />
         </state>
       </provider>
