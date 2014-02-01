@@ -7,6 +7,11 @@
  * summernote may be freely distributed under the MIT license./
  *
  * Date: 2013-12-29T10:27Z
+ *
+ * Modified by Yurii.
+ * Created single toolbar for all editors.
+ *
+ * Date: 2014-01-29T10:27Z
  */
 (function (factory) {
     /* global define */
@@ -1452,16 +1457,22 @@
 
         // makeLayoutInfo from editor's descendant node.
         var makeLayoutInfo = function (descendant) {
-            var $editor = $(descendant).closest('.note-editor');
+            var $toolbarWrap = $('.note-toolbar-wrap');
+            var $editor = $('.note-editor');
+
+            if (!$toolbarWrap) {
+                return;
+            }
+
             return {
                 editor: function () {
                     return $editor;
                 },
                 toolbar: function () {
-                    return $editor.find('.note-toolbar');
+                    return $toolbarWrap.find('.note-toolbar');
                 },
                 editable: function () {
-                    return $('.note-active-editor').find('.note-editable');
+                    return $editor.find('.note-editable');
                 },
                 codable: function () {
                     return $editor.find('.note-codable');
@@ -1470,13 +1481,13 @@
                     return $editor.find('.note-statusbar');
                 },
                 popover: function () {
-                    return $editor.find('.note-popover');
+                    return $toolbarWrap.find('.note-popover');
                 },
                 handle: function () {
-                    return $editor.find('.note-handle');
+                    return $toolbarWrap.find('.note-handle');
                 },
                 dialog: function () {
-                    return $editor.find('.note-dialog');
+                    return $toolbarWrap.find('.note-dialog');
                 }
             };
         };
@@ -1855,16 +1866,12 @@
          * @param {object} options - user options include custom event handlers
          * @param {function} options.enter - enter key handler
          */
-        this.attach = function (oLayoutInfo, options) {
-
-            //attachDragAndDropEvent(oLayoutInfo);
-
+        this.attachToolbar = function (oLayoutInfo) {
             oLayoutInfo.handle.on('mousedown', hHandleMousedown);
             oLayoutInfo.toolbar.on('click', hToolbarAndPopoverClick);
             oLayoutInfo.popover.on('click', hToolbarAndPopoverClick);
             oLayoutInfo.toolbar.on('mousedown', hToolbarAndPopoverMousedown);
             oLayoutInfo.popover.on('mousedown', hToolbarAndPopoverMousedown);
-            oLayoutInfo.statusbar.on('mousedown', hStatusbarMousedown);
 
             //toolbar table dimension
             var $toolbar = oLayoutInfo.toolbar;
@@ -1872,8 +1879,12 @@
             $catcher.on('mousemove', hDimensionPickerMove);
         };
 
-        this.attachEditable = function (oLayoutInfo, options) {
+        this.attachEditor = function (oLayoutInfo, options) {
             var self = this;
+
+            //attachDragAndDropEvent(oLayoutInfo);
+
+            oLayoutInfo.statusbar.on('mousedown', hStatusbarMousedown);
 
             oLayoutInfo.editable.on('keydown', hKeydown);
             oLayoutInfo.editable.on('mousedown', hMousedown);
@@ -1922,13 +1933,23 @@
             });
         };
 
-        this.dettach = function (oLayoutInfo) {
+        this.enableToolbar = function(oLayoutInfo) {
+            var $toolbar = oLayoutInfo.toolbar;
+            toolbar.enable($toolbar);
+        };
+
+        this.disableToolbar = function(oLayoutInfo) {
+            var $toolbar = oLayoutInfo.toolbar;
+            toolbar.disable($toolbar);
+        };
+
+        this.dettachToolbar = function (oLayoutInfo) {
             oLayoutInfo.toolbar.off();
             oLayoutInfo.handle.off();
             oLayoutInfo.popover.off();
         };
 
-        this.dettachEditable = function (oLayoutInfo) {
+        this.dettachEditor = function (oLayoutInfo) {
             oLayoutInfo.editable.off();
         };
     };
@@ -2328,30 +2349,23 @@
             });
         };
 
-        // createLayout
-        this.createLayout = function ($holder, options) {
-            var nHeight = options.height,
-                nTabsize = options.tabsize,
-                aToolbarSetting = options.toolbar,
+        // createToolbarLayout
+        this.createToolbarLayout = function ($holder, options) {
+            var aToolbarSetting = options.toolbar,
                 langInfo = $.summernote.lang[options.lang];
 
             //already created
-            if ($holder.next().hasClass('note-editor')) {
+            if ($holder.next().hasClass('note-toolbar-wrap')) {
                 return;
             }
 
             //01. create Editor
-            var $editor = $('<div class="note-editor"></div>');
-            $editor.data('options', options);
-
-            //02. statusbar
-            if (nHeight > 0) {
-                $('<div class="note-statusbar">' + tplStatusbar + '</div>').prependTo($editor);
-            }
+            var $toolbarWrap = $('<div class="note-toolbar-wrap"></div>');
+            $toolbarWrap.data('options', options);
 
             //04. create Toolbar
             var sToolbar = '';
-            for (var idx = 0, sz = aToolbarSetting.length; idx < sz; idx++) {
+            for (var idx = 0, sz = aToolbarSetting.length; idx < sz; idx ++) {
                 var group = aToolbarSetting[idx];
                 sToolbar += '<div class="note-' + group[0] + ' btn-group">';
                 for (var i = 0, szGroup = group[1].length; i < szGroup; i++) {
@@ -2362,40 +2376,45 @@
 
             sToolbar = '<div class="note-toolbar btn-toolbar">' + sToolbar + '</div>';
 
-            var $toolbar = $(sToolbar).prependTo($editor);
+            var $toolbar = $(sToolbar).prependTo($toolbarWrap);
             createPalette($toolbar);
             createTooltip($toolbar, 'bottom');
 
             //05. create Popover
-            var $popover = $(tplPopover(langInfo)).prependTo($editor);
+            var $popover = $(tplPopover(langInfo)).prependTo($toolbarWrap);
             createTooltip($popover);
 
             //06. handle(control selection, ...)
-            $(tplhandle).prependTo($editor);
+            $(tplhandle).prependTo($toolbarWrap);
 
             //07. create Dialog
-            var $dialog = $(tplDialog(langInfo)).prependTo($editor);
+            var $dialog = $(tplDialog(langInfo)).prependTo($toolbarWrap);
             $dialog.find('button.close, a.modal-close').click(function () {
                 $(this).closest('.modal').modal('hide');
             });
 
-            //08. create Dropzone
-            $('<div class="note-dropzone"><div class="note-dropzone-message"></div></div>').prependTo($editor);
-
-            $editor.prependTo($holder);
+            //09. Editor/Holder switch
+            $toolbarWrap.prependTo($holder);
         };
 
-        this.createEditable = function($holder, options) {
-            var nHeight = options.height;
-            var nTabsize = options.tabsize;
+        // createEditorLayout
+        this.createEditorLayout = function ($holder, options) {
+            var nHeight = options.height,
+                nTabsize = options.tabsize;
 
-            //already created
+            // 01. already created
             if ($holder.next().hasClass('note-editor')) {
                 return;
             }
 
+            // 01. create Editor
             var $editor = $('<div class="note-editor"></div>');
             $editor.data('options', options);
+
+            //02. statusbar
+            if (nHeight > 0) {
+                $('<div class="note-statusbar">' + tplStatusbar + '</div>').prependTo($editor);
+            }
 
             //03. create Editable
             var $editable = $('<div class="note-editable" contentEditable="true"></div>').prependTo($editor);
@@ -2418,38 +2437,36 @@
                 document.execCommand('styleWithCSS', 0, true);
             });
 
+            //08. create Dropzone
+            $('<div class="note-dropzone"><div class="note-dropzone-message"></div></div>').prependTo($editor);
+
             //09. Editor/Holder switch
             $editor.insertAfter($holder);
             $holder.hide();
         };
 
-        // layoutInfoFromHolderToolbar
-        var layoutInfoFromHolderToolbar = this.layoutInfoFromHolderToolbar = function ($holder) {
-            var $editor = $holder.find('.note-editor');
-            if (!$editor.hasClass('note-editor')) {
+        // layoutInfoFromToolbar
+        var layoutInfoFromToolbar = this.layoutInfoFromToolbar = function ($holder) {
+            var $toolbarWrap = $holder.find('.note-toolbar-wrap');
+            if (!$toolbarWrap) {
                 return;
             }
 
+            var $editor = $('.note-editor');
+
             return {
+                toolbarWrap: $toolbarWrap,
                 editor: $editor,
-                dropzone: $editor.find('.note-dropzone'),
-                toolbar: $editor.find('.note-toolbar'),
-                editable: $('.note-active-editor').find('.note-editable'),
-                codable: $editor.find('.note-codable'),
-                statusbar: $editor.find('.note-statusbar'),
-                popover: $editor.find('.note-popover'),
-                handle: $editor.find('.note-handle'),
-                dialog: $editor.find('.note-dialog')
+                toolbar: $toolbarWrap.find('.note-toolbar'),
+                editable: $editor.find('.note-editable'),
+                popover: $toolbarWrap.find('.note-popover'),
+                handle: $toolbarWrap.find('.note-handle'),
+                dialog: $toolbarWrap.find('.note-dialog')
             };
         };
 
-        // layoutInfoFromHolderEditor
-        var layoutInfoFromHolderEditor = this.layoutInfoFromHolderEditor = function ($holder) {
-            var $toolbar = $('.note-editor');
-            if (!$toolbar.hasClass('note-editor')) {
-                return;
-            }
-
+        // layoutInfoFromEditorHolder
+        var layoutInfoFromEditorHolder = this.layoutInfoFromEditorHolder = function ($holder) {
             var $editor = $holder.next();
             if (!$editor.hasClass('note-editor')) {
                 return;
@@ -2457,20 +2474,23 @@
 
             return {
                 editor: $editor,
-                dropzone: $toolbar.find('.note-dropzone'),
-                toolbar: $toolbar.find('.note-toolbar'),
+                dropzone: $editor.find('.note-dropzone'),
                 editable: $editor.find('.note-editable'),
                 codable: $editor.find('.note-codable'),
-                statusbar: $toolbar.find('.note-statusbar'),
-                popover: $toolbar.find('.note-popover'),
-                handle: $toolbar.find('.note-handle'),
-                dialog: $toolbar.find('.note-dialog')
+                statusbar: $editor.find('.note-statusbar')
             };
         };
 
-        // removeLayout
-        this.removeLayout = function ($holder) {
-            var info = layoutInfoFromHolderToolbar($holder);
+        this.removeToolbarLayout = function ($holder) {
+            var info = layoutInfoFromEditorHolder($holder);
+            if (!info) {
+                return;
+            }
+            info.toolbarWrap.remove();
+        };
+
+        this.removeEditorLayout = function ($holder) {
+            var info = layoutInfoFromEditorHolder($holder);
             if (!info) {
                 return;
             }
@@ -2613,43 +2633,28 @@
                 lang: 'en-US'
             }, options);
 
-
             var $holder = this;
 
             // createLayout with options
-            renderer.createLayout($holder, options);
+            renderer.createToolbarLayout($holder, options);
 
-            var info = renderer.layoutInfoFromHolderToolbar($holder);
-            eventHandler.attach(info, options);
-
+            var info = renderer.layoutInfoFromToolbar($holder);
+            eventHandler.attachToolbar(info);
+            eventHandler.disableToolbar(info);
         },
 
-        summernoteEditable: function (options) {
+        summernoteEditor: function (options) {
             options = $.extend({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'clear']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['paragraph']],
-                    //['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    //['view', ['fullscreen', 'codeview']],
-                    ['help', ['help']]
-                ],
-                lang: 'en-US'
             }, options);
 
             this.each(function (idx, elHolder) {
                 var $holder = $(elHolder);
 
-                // createLayout with options
-                renderer.createEditable($holder, options);
+                // createEditorLayout with options
+                renderer.createEditorLayout($holder, options);
 
-                var info = renderer.layoutInfoFromHolderEditor($holder);
-                eventHandler.attachEditable(info, options);
+                var info = renderer.layoutInfoFromEditorHolder($holder);
+                eventHandler.attachEditor(info, options);
 
                 // Textarea auto filling the code before form submit.
                 if (dom.isTextarea($holder[0])) {
@@ -2659,10 +2664,18 @@
                 }
             });
 
+            if (this.first()) {
+                var info = renderer.layoutInfoFromEditorHolder(this);
+                var $editable = info.editable;
+
+                $editable.focus();
+            }
+
             if (this.length > 0 && options.oninit) { // callback on init
                 options.oninit();
             }
         },
+
         // get the HTML contents of note or set the HTML contents of note.
         code: function (sHTML) {
             // get the HTML contents
@@ -2671,7 +2684,7 @@
                 if ($holder.length === 0) {
                     return;
                 }
-                var info = renderer.layoutInfoFromHolderEditor($holder);
+                var info = renderer.layoutInfoFromEditorHolder($holder);
                 if (!!(info && info.editable)) {
                     var bCodeview = info.editor.hasClass('codeview');
                     if (bCodeview && agent.bCodeMirror) {
@@ -2683,36 +2696,55 @@
             }
 
             // set the HTML contents
-            var info = renderer.layoutInfoFromHolderEditor(this);
+            var info = renderer.layoutInfoFromEditorHolder(this);
             if (info && info.editable) {
                 info.editable.html(sHTML);
             }
 
         },
-        // destroy Editor Layout and dettach Key and Mouse Event
-        destroy: function () {
+
+        // destroy Toolbar Layout and dettach Key and Mouse Event
+        destroyToolbar: function () {
             this.each(function (idx, elHolder) {
                 var $holder = $(elHolder);
 
-                var info = renderer.layoutInfoFromHolderToolbar($holder);
-                if (!info || !info.editable) {
+                var info = renderer.layoutInfoFromToolbar($holder);
+                if (!info || !info.toolbar) {
                     return;
                 }
-                eventHandler.dettach(info);
-                renderer.removeLayout($holder);
+                eventHandler.dettachToolbar(info);
+                renderer.removeToolbarLayout($holder);
             });
         },
+
+        // desable Toolbar
+        enableToolbar: function (options) {
+            var info = renderer.layoutInfoFromToolbar(this);
+            if (!info || !info.toolbar) {
+                return;
+            }
+            if (options.enabled == true) {
+                eventHandler.enableToolbar(info);
+            }
+            else {
+                eventHandler.disableToolbar(info);
+            }
+        },
+
+        // destroy Editor Layout and dettach Key and Mouse Event
         destroyEditor: function () {
             this.each(function (idx, elHolder) {
                 var $holder = $(elHolder);
 
-                var info = renderer.layoutInfoFromHolderEditor($holder);
+                var info = renderer.layoutInfoFromEditorHolder($holder);
                 if (!info || !info.editable) {
                     return;
                 }
-                eventHandler.dettachEditable(info);
+                eventHandler.dettachEditor(info);
+                renderer.removeEditorLayout($holder);
             });
         },
+
         // inner object for test
         summernoteInner: function () {
             return { dom: dom, list: list, func: func, range: range };

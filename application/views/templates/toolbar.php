@@ -11,10 +11,12 @@
         <button onclick="CardProcessor.publishCard(this);">Preview</button>
         <button onclick="CardProcessor.publishCard(this);">Publish</button>
     </div>
+
+    <textarea data-bind='value: lastSavedJson' rows='5' cols='60' disabled='disabled'> </textarea>
 </div>
 
 <script>
     $(document).ready(function () {
-        $('.editor-toolbar').summernoteToolbar();
+        $(Data.card.toolbar).summernoteToolbar();
     });
 </script>
