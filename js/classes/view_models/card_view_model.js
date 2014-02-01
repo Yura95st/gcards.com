@@ -1,72 +1,52 @@
-var CardViewModel = function () {
+function CardViewModel() {
     var self = this;
 
-    self.coverId = ko.observable(0);
-
+    self.coverId = ko.observable(Data.values.defaultCard.coverId);
     self.blocks = ko.observableArray(new Array());
 
     self.addBlock = function () {
         var position = new Position();
-        position.x = ko.observable(10);
-        position.y = ko.observable(10);
-        position.height = ko.observable(75);
-        position.width = ko.observable(400);
+        position.x = ko.observable(Data.values.defaultCard.block.position.x);
+        position.y = ko.observable(Data.values.defaultCard.block.position.y);
+        position.height = ko.observable(Data.values.defaultCard.block.position.height);
+        position.width = ko.observable(Data.values.defaultCard.block.position.width);
 
         var block = new Block();
         block.position = position;
-        block.content = ko.observable(Data.values.card.defaultContent);
+        block.content = ko.observable(Data.values.defaultCard.block.content);
 
         self.blocks.push(block);
-
-        $(Data.card.blockContent).summernoteEditable();
     };
 
-    self.removeBlock = function (block) {
+    self.removeBlock = function () {
+        var block = this;
         self.blocks.remove(block);
+        BlockView.disableToolbar();
     };
 
     self.canAddBlock = function () {
         return (self.blocks().length < 10);
-    }
+    };
 
+
+    /* FOR DEBUGGING ONLY */
     self.save = function () {
         self.lastSavedJson(JSON.stringify(ko.toJS(self), null, 2));
     };
 
     self.lastSavedJson = ko.observable("");
-
-    self.showEditor = function() {
-
-    }
 };
 
 ko.bindingHandlers.blocksDraggableResizable = {
     init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-        var $viewModel = bindingContext.$data;
+        var blockView = BlockView;
 
-        $(element).resizable({ handles: "n, e, s, w, ne, se, sw, nw", containment: Data.card.containment,
-            stop: function (event, ui) {
-                $viewModel.position.height(ui.size.height);
-                $viewModel.position.width(ui.size.width);
-                $viewModel.position.x(ui.position.left);
-                $viewModel.position.y(ui.position.top);
-
-            }
-        });
-
-        $(element).draggable({ containment: Data.card.containment, cursor: "move", stack: Data.card.block, snap: true,
-            stop: function (event, ui) {
-                $viewModel.position.x(ui.position.left);
-                $viewModel.position.y(ui.position.top);
-            }
-        });
-
-        //Show editor on doubleClick event
-        $(element).dblclick(function() {
-            CardProcessor.showEditor(element);
-        });
+        BlockView.bindResizeable(element);
+        BlockView.bindDraggable(element);
+        BlockView.bindDoubleClick(element);
     }
 };
 
-var cardViewModel = new CardViewModel();
-ko.applyBindings(cardViewModel);
+var CardViewModel = new CardViewModel();
+ko.applyBindings(CardViewModel, $(Data.toolbar)[0]);
+ko.applyBindings(CardViewModel, $(Data.card.blockWrap)[0]);

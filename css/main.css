@@ -234,14 +234,12 @@ a:hover {
     width: 600px;
 }
 .card-block .block-content {
-    color: #FFFFFF;
-    font-size: 24pt;
     word-wrap: break-word;
 }
 .card-block .note-editor {
     border: 0;
 }
-.card-block .note-active-editor {
+.card-block .note-editor {
     background-color: rgba(255, 255, 255, 0.7);
 }
 /* VIEW CARD */
@@ -254,7 +252,8 @@ a:hover {
     background: none repeat scroll 0 0 #F1F1F1;
     border-bottom: 1px solid #E8E8E8;
     display: block;
-    height: 44px;
+    /*height: 44px;*/
+    height: 150px;
     padding: 5px;
 }
 #toolbar .pick-cover-add-block-wrap {
@@ -270,13 +269,61 @@ a:hover {
     margin: 0 10px;
 }
 
-.editor-toolbar .note-editor {
+.editor-toolbar .note-toolbar-wrap {
     border: 0;
 }
 
-.editor-toolbar .note-editor .note-toolbar {
+.editor-toolbar .note-toolbar-wrap .note-toolbar {
     background: transparent;
     border: 0;
     padding: 0;
     margin: 0;
+}
+
+/* Modal */
+#modal .mask {
+    background-color: #FFFFFF;
+    display: none;
+    height: 100%;
+    left: 0;
+    opacity: 0.7;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+}
+#modal .content
+{
+    left: 0;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+}
+#modal .loader
+{
+    left: 0;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+}
+
+/* InfoMessage */
+#info-message {
+    display: none;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 500px;
+    z-index: 10;
+}
+#info-message .content {
+    background-color: #F9EDBE;
+    border: 1px solid #F0C36D;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    margin: 0 auto;
+    padding: 6px 10px;
+    text-align: center;
+    word-wrap: break-word;
 }
