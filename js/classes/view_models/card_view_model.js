@@ -3,6 +3,8 @@ function CardViewModel() {
 
     self.cover = ko.observable(Data.values.defaultCard.cover);
     self.blocks = ko.observableArray(new Array());
+    self.editingBlock = ko.observable(null);
+    self.previewMode = ko.observable(false);
 
     self.addBlock = function () {
         var position = new Position();
@@ -28,22 +30,84 @@ function CardViewModel() {
         return (self.blocks().length < 10);
     };
 
+    self.preview = function() {
+        self.previewMode(true);
+        $('body').scrollTo($(Data.header).outerHeight(true));
+
+        //TODO: redo this
+        BlockView.hideAllEditors();
+    };
+
+    self.exitPreviewMode = function() {
+        self.previewMode(false);
+        $('body').scrollTo(0);
+    }
+
 
     /* FOR DEBUGGING ONLY */
     self.save = function () {
+        self.lastSavedJson("");
         self.lastSavedJson(JSON.stringify(ko.toJS(self), null, 2));
     };
 
     self.lastSavedJson = ko.observable("");
 };
 
-ko.bindingHandlers.blocksDraggableResizable = {
-    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-        var blockView = BlockView;
+ko.bindingHandlers.blockResizable = {
 
-        BlockView.bindResizeable(element);
-        BlockView.bindDraggable(element);
-        BlockView.bindDoubleClick(element);
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+
+        $(element).resizable({ handles: "n, e, s, w, ne, se, sw, nw", containment: Data.card.containment,
+            stop: function (event, ui) {
+                viewModel.position.height(ui.size.height);
+                viewModel.position.width(ui.size.width);
+                viewModel.position.x(ui.position.left);
+                viewModel.position.y(ui.position.top);
+            }
+        });
+    },
+    update: function(element, valueAccessor) {
+        var value = ko.unwrap(valueAccessor());
+
+        (value == true) ? $(element).resizable('enable') : $(element).resizable('disable');
+    }
+};
+
+ko.bindingHandlers.blockDraggable = {
+
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+
+        $(element).draggable({ containment: Data.card.containment, cursor: "move",
+            stack: Data.card.block, snap: true,
+            stop: function (event, ui) {
+                viewModel.position.x(ui.position.left);
+                viewModel.position.y(ui.position.top);
+            }
+        });
+    },
+    update: function(element, valueAccessor) {
+
+        var value = ko.unwrap(valueAccessor());
+
+        (value == true) ? $(element).draggable('enable') : $(element).draggable('disable');
+    }
+};
+
+ko.bindingHandlers.blockDoubleClick = {
+
+    update: function(element, valueAccessor) {
+
+        var value = ko.unwrap(valueAccessor());
+
+        if (value == true) {
+            //Show editor on doubleClick event
+            $(element).on('dblclick', function () {
+                BlockView.showEditor(this);
+            });
+        }
+        else {
+            $(element).unbind("dblclick");
+        }
     }
 };
 
@@ -59,6 +123,14 @@ ko.bindingHandlers.fadeImage = {
         $(element).fadeOut('slow',function() {
             $(element).attr('src', cover.original).fadeIn(270);
         });
+    }
+};
+
+ko.bindingHandlers.slideToggle = {
+    update: function(element, valueAccessor) {
+        var value = ko.unwrap(valueAccessor());
+
+        (value == true) ? $(element).slideUp() : $(element).slideDown();
     }
 };
 

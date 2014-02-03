@@ -1,4 +1,4 @@
-<div id="toolbar">
+<div id="toolbar" data-bind='slideToggle: cardViewModel.previewMode'>
     <div class="pick-cover-add-block-wrap">
         <button data-bind='click: coverPickerViewModel.showPicker'>Pick cover</button>
         <button data-bind='click: cardViewModel.addBlock, enable: cardViewModel.canAddBlock()'>Add a block</button>
@@ -8,11 +8,17 @@
     <div class="editor-toolbar"></div>
 
     <div class="preview-publish-wrap">
-        <button onclick="CardProcessor.publishCard(this);">Preview</button>
-        <button onclick="CardProcessor.publishCard(this);">Publish</button>
+        <button data-bind='click: cardViewModel.preview'>Preview</button>
+        <button>Publish</button>
     </div>
 
     <textarea data-bind='value: cardViewModel.lastSavedJson' rows='5' cols='60' disabled='disabled'> </textarea>
+</div>
+
+<div id="top-info-bar" data-bind='slideToggle: !cardViewModel.previewMode()'>
+    <div class="content">Preview mode is now activated.</div>
+    <button data-bind='click: cardViewModel.exitPreviewMode'>Back to editing</button>
+    <button>Publish</button>
 </div>
 
 <script>

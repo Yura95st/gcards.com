@@ -280,6 +280,23 @@ a:hover {
     margin: 0;
 }
 
+/* Top Info Bar */
+#top-info-bar {
+    background-color: #4272DB;
+    display: none;
+    overflow: hidden;
+}
+#top-info-bar .content {
+    color: #FFFFFF;
+    float: left;
+    font-weight: bold;
+    padding: 8px 12px 6px;
+}
+
+#top-info-bar button {
+    margin: 5px 0 0;
+}
+
 /* Modal */
 #modal .mask {
     background-color: #FFFFFF;

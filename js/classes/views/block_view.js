@@ -16,10 +16,9 @@ function BlockView()
     self.showEditor = function(block) {
         self.hideAllEditors();
 
-        $(block).draggable('disable');
-        self.unbindDoubleClick(block);
-
         var viewModel = ko.dataFor(block);
+
+        cardViewModel.editingBlock(viewModel);
 
         if (viewModel.content() == Data.values.defaultCard.block.content) {
             viewModel.content("");
@@ -28,22 +27,20 @@ function BlockView()
         var blockContent = $(block).find(Data.card.blockContent);
 
         blockContent.summernoteEditor();
-        blockContent.code(viewModel.content());
 
         self.enableToolbar();
     };
 
     self.hideEditor = function(block) {
-        self.unbindDoubleClick(block);
-        $(block).draggable('enable');
-        self.bindDoubleClick(block);
+        cardViewModel.editingBlock(null);
 
         var viewModel = ko.dataFor(block);
         var blockContent = $(block).find(Data.card.blockContent);
         var html = blockContent.code();
 
-        if (html == "") {
-            viewModel.content(Data.values.defaultCard.block.content);
+        if (html == "" || html == "<p><br></p>") {
+            blockContent.code(Data.values.defaultCard.block.content);
+            viewModel.content("");
         }
         else {
             viewModel.content(html);
@@ -58,8 +55,9 @@ function BlockView()
         blocks.each(function (idx, block) {
 
             self.hideEditor(block);
-            self.disableToolbar();
         });
+
+        self.disableToolbar();
     };
 
     self.enableToolbar = function() {
@@ -78,46 +76,6 @@ function BlockView()
         toolbar.enableToolbar({
             enabled : enabled
         });
-    };
-
-    self.removeBlock = function(block) {
-        cardViewModel.removeBlock(block);
-    };
-
-    self.bindResizeable = function(block) {
-        var viewModel = ko.dataFor(block);
-
-        $(block).resizable({ handles: "n, e, s, w, ne, se, sw, nw", containment: Data.card.containment,
-            stop: function (event, ui) {
-                viewModel.position.height(ui.size.height);
-                viewModel.position.width(ui.size.width);
-                viewModel.position.x(ui.position.left);
-                viewModel.position.y(ui.position.top);
-            }
-        });
-    };
-
-    self.bindDraggable = function(block) {
-        var viewModel = ko.dataFor(block);
-
-        $(block).draggable({ containment: Data.card.containment, cursor: "move",
-            stack: Data.card.block, snap: true,
-            stop: function (event, ui) {
-                viewModel.position.x(ui.position.left);
-                viewModel.position.y(ui.position.top);
-            }
-        });
-    };
-
-    self.bindDoubleClick = function(block) {
-        //Show editor on doubleClick event
-        $(block).on('dblclick', function () {
-            self.showEditor(this);
-        });
-    };
-
-    self.unbindDoubleClick = function(block) {
-        $(block).unbind("dblclick");
     };
 }
 

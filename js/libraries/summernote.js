@@ -2426,7 +2426,8 @@
                 $editable.data('tabsize', nTabsize);
             }
 
-            $editable.html(dom.html($holder) || dom.emptyPara);
+            //$editable.html(dom.html($holder) || dom.emptyPara);
+            $editable.html(dom.html($holder) || "");
             $editable.data('NoteHistory', new History());
 
             //031. create codable
