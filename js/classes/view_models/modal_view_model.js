@@ -29,7 +29,7 @@ function ModalViewModel() {
     var setPosition = function() {
         self.maskHeight($(document).height());
         setContentPosition();
-        setLoaderPosition();
+        //setLoaderPosition();
     };
 
     var setContentPosition = function() {
@@ -42,8 +42,8 @@ function ModalViewModel() {
     var setLoaderPosition = function() {
         var loader = $(Data.modal.wrap).find(Data.modal.loader);
 
-        self.contentX($(window).width()/2 - loader.width()/2);
-        self.contentY($(window).height()/2 - loader.height()/2);
+        //self.contentX($(window).width()/2 - loader.width()/2);
+        //self.contentY($(window).height()/2 - loader.height()/2);
     };
 }
 
@@ -62,4 +62,3 @@ ko.bindingHandlers.fadeVisible = {
 };
 
 var ModalViewModel = new ModalViewModel();
-ko.applyBindings(ModalViewModel, $(Data.modal.wrap)[0]);

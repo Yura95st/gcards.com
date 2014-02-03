@@ -1,7 +1,7 @@
 function CardViewModel() {
     var self = this;
 
-    self.coverId = ko.observable(Data.values.defaultCard.coverId);
+    self.cover = ko.observable(Data.values.defaultCard.cover);
     self.blocks = ko.observableArray(new Array());
 
     self.addBlock = function () {
@@ -47,6 +47,19 @@ ko.bindingHandlers.blocksDraggableResizable = {
     }
 };
 
+ko.bindingHandlers.fadeImage = {
+    init: function(element, valueAccessor) {
+        var cover = ko.unwrap(valueAccessor());
+        $(element).toggle(cover);
+        $(element).attr('src', cover.original);
+    },
+    update: function(element, valueAccessor) {
+        var cover = ko.unwrap(valueAccessor());
+
+        $(element).fadeOut('slow',function() {
+            $(element).attr('src', cover.original).fadeIn(270);
+        });
+    }
+};
+
 var CardViewModel = new CardViewModel();
-ko.applyBindings(CardViewModel, $(Data.toolbar)[0]);
-ko.applyBindings(CardViewModel, $(Data.card.blockWrap)[0]);

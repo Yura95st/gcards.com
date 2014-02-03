@@ -23,4 +23,3 @@ function InfoMessageViewModel() {
 }
 
 var InfoMessageViewModel = new InfoMessageViewModel();
-ko.applyBindings(InfoMessageViewModel, $(Data.infoMessage.wrap)[0]);

@@ -33,7 +33,7 @@ function BlockView()
         self.enableToolbar();
     };
 
-    self.hideEditor = function() {
+    self.hideEditor = function(block) {
         self.unbindDoubleClick(block);
         $(block).draggable('enable');
         self.bindDoubleClick(block);

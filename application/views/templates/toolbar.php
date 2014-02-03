@@ -1,8 +1,8 @@
 <div id="toolbar">
     <div class="pick-cover-add-block-wrap">
-        <button>Pick cover</button>
-        <button data-bind='click: addBlock, enable: canAddBlock()'>Add a block</button>
-        <button data-bind='click: save'>Save to JSON</button>
+        <button data-bind='click: coverPickerViewModel.showPicker'>Pick cover</button>
+        <button data-bind='click: cardViewModel.addBlock, enable: cardViewModel.canAddBlock()'>Add a block</button>
+        <button data-bind='click: cardViewModel.save'>Save to JSON</button>
     </div>
 
     <div class="editor-toolbar"></div>
@@ -12,7 +12,7 @@
         <button onclick="CardProcessor.publishCard(this);">Publish</button>
     </div>
 
-    <textarea data-bind='value: lastSavedJson' rows='5' cols='60' disabled='disabled'> </textarea>
+    <textarea data-bind='value: cardViewModel.lastSavedJson' rows='5' cols='60' disabled='disabled'> </textarea>
 </div>
 
 <script>

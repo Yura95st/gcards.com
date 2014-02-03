@@ -1,7 +1,7 @@
 var Data =
 {
-    card : {
-        block : '.card-block',
+    card: {
+        block: '.card-block',
         blockContent: '.block-content',
         blockWrap: '.card-block-wrap',
         containment: '.main-body',
@@ -10,23 +10,28 @@ var Data =
         editable: '.note-editable',
         toolbar: '.editor-toolbar'
     },
-    ajax : {
-        progress : '.progress',
-        url : 'http://127.0.0.1/gcards.com/card_controller/publish/?XDEBUG_SESSION_START=18498'
+    ajax: {
+        progress: '.progress',
+        url: 'http://127.0.0.1/gcards.com/card_controller/publish/?XDEBUG_SESSION_START=18498'
     },
-    modal : {
+    modal: {
         content: '.content',
         loader: '.loader',
         wrap: '#modal'
     },
-    infoMessage : {
-        content: '.content',
+    infoMessage: {
         wrap: '#info-message'
     },
-    toolbar : '#toolbar',
-    values : {
+    coverPicker: {
+        wrap: '.cover-picker'
+    },
+    values: {
         defaultCard: {
-            coverId : 0,
+            cover: {
+                id: 1,
+                mini: "http://127.0.0.1/gcards.com/img/covers/mini/bg_5_mini.jpg",
+                original: "http://127.0.0.1/gcards.com/img/covers/original/bg_5.jpg"
+            },
             block: {
                 content: "Double-click to edit",
                 position: {
@@ -36,6 +41,77 @@ var Data =
                     width: 400
                 }
             }
+        },
+        coverPicker: {
+            header : "Cover Picker",
+            menu: [
+                {
+                    id: 1,
+                    title: "All"
+                },
+                {
+                    id: 2,
+                    title: "New Year"
+                },
+                {
+                    id: 3,
+                    title: "St. Valentines Day"
+                },
+                {
+                    id: 4,
+                    title: "Women's Day"
+                }
+            ],
+            covers: [
+                // all:
+                [
+                    {
+                        id: 1,
+                        mini: "http://127.0.0.1/gcards.com/img/covers/mini/bg_5_mini.jpg",
+                        original: "http://127.0.0.1/gcards.com/img/covers/original/bg_5.jpg"
+                    },
+                    {
+                        id: 2,
+                        mini: "http://127.0.0.1/gcards.com/img/covers/mini/bg_4_mini.jpg",
+                        original: "http://127.0.0.1/gcards.com/img/covers/original/bg_4.jpg"
+                    },
+                    {
+                        id: 3,
+                        mini: "http://127.0.0.1/gcards.com/img/covers/mini/bg_12_mini.jpg",
+                        original: "http://127.0.0.1/gcards.com/img/covers/original/bg_12.jpg"
+                    }
+                ],
+                // New Year:
+                [
+                    {
+                        id: 1,
+                        mini: "http://127.0.0.1/gcards.com/img/covers/mini/bg_5_mini.jpg",
+                        original: "http://127.0.0.1/gcards.com/img/covers/original/bg_5.jpg"
+                    },
+                    {
+                        id: 3,
+                        mini: "http://127.0.0.1/gcards.com/img/covers/mini/bg_12_mini.jpg",
+                        original: "http://127.0.0.1/gcards.com/img/covers/original/bg_12.jpg"
+                    }
+                ],
+                // st. Valentines Day:
+                [
+                    {
+                        id: 1,
+                        mini: "http://127.0.0.1/gcards.com/img/covers/mini/bg_5_mini.jpg",
+                        original: "http://127.0.0.1/gcards.com/img/covers/original/bg_5.jpg"
+                    }
+                ],
+                // Women's Day:
+                [
+                    {
+                        id: 2,
+                        mini: "http://127.0.0.1/gcards.com/img/covers/mini/bg_4_mini.jpg",
+                        original: "http://127.0.0.1/gcards.com/img/covers/original/bg_4.jpg"
+                    }
+                ]
+            ]
+
         }
     }
 };

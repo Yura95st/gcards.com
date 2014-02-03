@@ -31,14 +31,14 @@
 
 <!-- Modal -->
 <div id="modal">
-    <div class="mask" data-bind="fadeVisible: displayMask, click: hide, style { height: maskHeight() + 'px'}"></div>
-    <div class="loader" data-bind="visible: displayLoader"></div>
-    <div class="content" data-bind="visible: displayContent, html: content, style { left: contentX() + 'px', top: contentY() + 'px'}"></div>
+    <div class="mask" data-bind="fadeVisible: modalViewModel.displayMask, click: modalViewModel.hide, style { height: modalViewModel.maskHeight() + 'px'}"></div>
+    <div class="loader" data-bind="visible: modalViewModel.displayLoader"></div>
+    <div class="content" data-bind="visible: modalViewModel.displayContent, html: modalViewModel.content, style { left: modalViewModel.contentX() + 'px', top: modalViewModel.contentY() + 'px'}"></div>
 </div>
 
 <!-- InfoMessage -->
-<div id="info-message" data-bind="fadeVisible: displayMessage, style { left: positionX() + 'px'}">
-    <div class="content" data-bind="html: content"></div>
+<div id="info-message" data-bind="fadeVisible: infoMessageViewModel.displayMessage, style { left: infoMessageViewModel.positionX() + 'px'}">
+    <div class="content" data-bind="html: infoMessageViewModel.content"></div>
 </div>
 
 <!-- Libraries import -->
@@ -58,6 +58,9 @@
 <script type='text/javascript' src='<?php echo base_url(); ?>js/classes/view_models/card_view_model.js'></script>
 <script type='text/javascript' src='<?php echo base_url(); ?>js/classes/view_models/modal_view_model.js'></script>
 <script type='text/javascript' src='<?php echo base_url(); ?>js/classes/view_models/info_message_view_model.js'></script>
+<script type='text/javascript' src='<?php echo base_url(); ?>js/classes/view_models/cover_picker_view_model.js'></script>
+
+<script type='text/javascript' src='<?php echo base_url(); ?>js/classes/view_models/main_view_model.js'></script>
 
 <!-- Processors import -->
 <script type='text/javascript' src='<?php echo base_url(); ?>js/classes/processors/card_processor.js'></script>
