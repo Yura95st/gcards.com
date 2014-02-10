@@ -1481,7 +1481,7 @@
                     return $editor.find('.note-statusbar');
                 },
                 popover: function () {
-                    return $toolbarWrap.find('.note-popover');
+                    return $editor.find('.note-popover');
                 },
                 handle: function () {
                     return $toolbarWrap.find('.note-handle');
@@ -1869,9 +1869,7 @@
         this.attachToolbar = function (oLayoutInfo) {
             oLayoutInfo.handle.on('mousedown', hHandleMousedown);
             oLayoutInfo.toolbar.on('click', hToolbarAndPopoverClick);
-            oLayoutInfo.popover.on('click', hToolbarAndPopoverClick);
             oLayoutInfo.toolbar.on('mousedown', hToolbarAndPopoverMousedown);
-            oLayoutInfo.popover.on('mousedown', hToolbarAndPopoverMousedown);
 
             //toolbar table dimension
             var $toolbar = oLayoutInfo.toolbar;
@@ -1890,6 +1888,9 @@
             oLayoutInfo.editable.on('mousedown', hMousedown);
             oLayoutInfo.editable.on('keyup mouseup', hToolbarAndPopoverUpdate);
             oLayoutInfo.editable.on('scroll', hScroll);
+
+            oLayoutInfo.popover.on('click', hToolbarAndPopoverClick);
+            oLayoutInfo.popover.on('mousedown', hToolbarAndPopoverMousedown);
 
             // save selection when focusout
             oLayoutInfo.editable.on('blur', function () {
@@ -1946,11 +1947,11 @@
         this.dettachToolbar = function (oLayoutInfo) {
             oLayoutInfo.toolbar.off();
             oLayoutInfo.handle.off();
-            oLayoutInfo.popover.off();
         };
 
         this.dettachEditor = function (oLayoutInfo) {
             oLayoutInfo.editable.off();
+            oLayoutInfo.popover.off();
         };
     };
 
@@ -2380,10 +2381,6 @@
             createPalette($toolbar);
             createTooltip($toolbar, 'bottom');
 
-            //05. create Popover
-            var $popover = $(tplPopover(langInfo)).prependTo($toolbarWrap);
-            createTooltip($popover);
-
             //06. handle(control selection, ...)
             $(tplhandle).prependTo($toolbarWrap);
 
@@ -2401,6 +2398,8 @@
         this.createEditorLayout = function ($holder, options) {
             var nHeight = options.height,
                 nTabsize = options.tabsize;
+
+            var langInfo = $.summernote.lang[options.lang];
 
             // 01. already created
             if ($holder.next().hasClass('note-editor')) {
@@ -2438,6 +2437,10 @@
                 document.execCommand('styleWithCSS', 0, true);
             });
 
+            //05. create Popover
+            var $popover = $(tplPopover(langInfo)).prependTo($editor);
+            createTooltip($popover);
+
             //08. create Dropzone
             $('<div class="note-dropzone"><div class="note-dropzone-message"></div></div>').prependTo($editor);
 
@@ -2460,7 +2463,6 @@
                 editor: $editor,
                 toolbar: $toolbarWrap.find('.note-toolbar'),
                 editable: $editor.find('.note-editable'),
-                popover: $toolbarWrap.find('.note-popover'),
                 handle: $toolbarWrap.find('.note-handle'),
                 dialog: $toolbarWrap.find('.note-dialog')
             };
@@ -2476,6 +2478,7 @@
             return {
                 editor: $editor,
                 dropzone: $editor.find('.note-dropzone'),
+                popover: $editor.find('.note-popover'),
                 editable: $editor.find('.note-editable'),
                 codable: $editor.find('.note-codable'),
                 statusbar: $editor.find('.note-statusbar')
@@ -2646,6 +2649,7 @@
 
         summernoteEditor: function (options) {
             options = $.extend({
+                lang: 'en-US'
             }, options);
 
             this.each(function (idx, elHolder) {

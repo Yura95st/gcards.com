@@ -138,7 +138,7 @@ ko.bindingHandlers.blockResizable = {
 ko.bindingHandlers.blockRotatable = {
     init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
 
-        var handle = $(Data.card.block).find(Data.card.blockRotateButton);
+        var handle = $(element).find(Data.card.blockRotateButton);
 
         $(element).rotatable({
             angle: 0.000001,
