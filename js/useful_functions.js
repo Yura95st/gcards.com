@@ -39,21 +39,3 @@ function isVarsFull(vars)
     }
     return true;
 }
-
-function show_message_absolute(msg_text)
-{
-    var boxId = '#message_box_absolute';
-    var innerId = '#inner_message';
-    
-    $(boxId+' '+innerId).html('');
-    
-    if (!isVarsFull([msg_text])) {
-        return false;
-    }
-    
-    $(boxId+' '+innerId).html(msg_text);
-    
-    $(boxId).fadeIn(500);
-    
-    setTimeout(function(){ $(boxId).fadeOut(500); },5000);
-}

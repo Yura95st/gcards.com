@@ -7,6 +7,7 @@ class Cover
     private $id = 0;
     private $pathOriginal = "";
     private $pathMini = "";
+    private $partitionId = 0;
     private $visibleToAll = 0;
 
     function __construct()
@@ -66,6 +67,24 @@ class Cover
     }
 
     /**
+     * @param int $partisionId
+     */
+    public function setPartitionId($partitionId)
+    {
+        if (Validation::isInteger($partitionId, 0)) {
+            $this->partitionId = $partitionId;
+        }
+    }
+
+    /**
+     * @return int
+     */
+    public function getPartitionId()
+    {
+        return $this->partitionId;
+    }
+
+    /**
      * @param int $visibleToAll
      */
     public function setVisibleToAll($visibleToAll)
@@ -85,7 +104,8 @@ class Cover
 
     public function isDefault()
     {
-        if ($this->id == 0 && $this->pathOriginal == "" && $this->pathMini == "" && $this->visibleToAll == 0) {
+        if ($this->id == 0 && $this->pathOriginal == "" && $this->pathMini == ""
+            && $this->partitionId == 0 && $this->visibleToAll == 0) {
             return true;
         } else {
             return false;

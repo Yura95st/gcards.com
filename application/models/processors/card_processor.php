@@ -50,9 +50,11 @@ class Card_Processor extends CI_Model
         return $card;
     }
 
-    private function getBlocks($blocksIdArray)
+    private function getBlocks($blocksIdRow)
     {
         $blocks = array();
+
+        $blocksIdArray = explode(",", $blocksIdRow);
 
         if ($blocksIdArray == null || sizeof($blocksIdArray) == 0
             || !Validation::arrayHasOnlyIntegers($blocksIdArray)) {
@@ -63,7 +65,7 @@ class Card_Processor extends CI_Model
         $sql = " SELECT " . FieldsNames::$BLOCKS_ID . "," .
             FieldsNames::$BLOCKS_POSITION . "," . FieldsNames::$BLOCKS_CONTENT .
             " FROM " . FieldsNames::$BLOCKS_TABLE .
-            " WHERE " . FieldsNames::$BLOCKS_ID . " IN (" . $blocksIdArray . ")";
+            " WHERE " . FieldsNames::$BLOCKS_ID . " IN (" . $blocksIdRow . ")";
 
         $query = $this->db->query($sql); //, array($blocksIdArray));
 

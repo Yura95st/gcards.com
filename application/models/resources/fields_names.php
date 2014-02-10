@@ -32,6 +32,7 @@ class FieldsNames
     public static $JSON_POSITION_Y = "y";
     public static $JSON_POSITION_HEIGHT = "height";
     public static $JSON_POSITION_WIDTH = "width";
+    public static $JSON_POSITION_ANGLE = "angle";
 
     //JSON Block fields
     public static $JSON_BLOCK_CONTENT = "content";

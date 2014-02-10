@@ -11,8 +11,6 @@ class Main extends CI_Controller
 
         //for debugging aims only
         $this->output->enable_profiler(TRUE);
-
-        $this->load->model('processors/cover_processor');
     }
 
     public function index()
@@ -20,24 +18,19 @@ class Main extends CI_Controller
         $this->load->view('templates/meta');
         $this->load->view('templates/header');
 
-        $this->lang->load('main_content'); //, 'russian');
-
-        //Get random cover
-        $cover = $this->cover_processor->getCover(1);
-        $path = "";
-        if ($cover != null) {
-            $path = $cover->getPathOriginal();
-        }
+        $this->lang->load('main'); //, 'russian');
 
         $data = array(
-            'img' => base_url() . $path,
-            'headline' => $this->lang->line('info_headline'),
-            'description' => $this->lang->line('info_description'),
-            'create_card_button' => $this->lang->line('create_card_button'),
+            'first_slide_text' => $this->lang->line('first_slide_text'),
+            'second_slide_text' => $this->lang->line('second_slide_text'),
+            'third_slide_text' => $this->lang->line('third_slide_text')
         );
+
         $this->load->view('view_main', $data);
 
+
         $this->lang->load('footer'); //, 'russian');
+
         $data = array(
             'menu_main' => $this->lang->line('menu_main'),
             'menu_create_card' => $this->lang->line('menu_create_card'),

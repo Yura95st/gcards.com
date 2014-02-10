@@ -2,6 +2,8 @@
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+define('PHP_INT_MIN', 0-PHP_INT_MAX);
+
 class Validation
 {
 
@@ -11,7 +13,7 @@ class Validation
      * @param int $max
      * @return bool
      */
-    public static function isInteger($val, $min = PHP_INT_MIN, $max = PHP_INT_MAX)
+    public static function isInteger($val, $min = PHP_INT_MAX, $max = PHP_INT_MAX)
     {
         $filter_options = array(
             'options' => array('min' => $min,
@@ -28,7 +30,7 @@ class Validation
     {
         foreach ($array as $value)
         {
-            if (!isInteger($value))
+            if (!Validation::isInteger($value))
             {
                 return false;
             }

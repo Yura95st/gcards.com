@@ -12,18 +12,25 @@ function CardViewModel() {
         position.y = ko.observable(Data.values.defaultCard.block.position.y);
         position.height = ko.observable(Data.values.defaultCard.block.position.height);
         position.width = ko.observable(Data.values.defaultCard.block.position.width);
+        position.angle = ko.observable(Data.values.defaultCard.block.position.angle);
 
         var block = new Block();
         block.position = position;
         block.content = ko.observable(Data.values.defaultCard.block.content);
 
         self.blocks.push(block);
+
+        //Activate tooltips
+        $(Data.card.block).find(Data.card.blockCloseButton).tooltip();
+        $(Data.card.block).find(Data.card.blockRotateButton).tooltip();
     };
 
     self.removeBlock = function () {
         var block = this;
+        var blockView = Global.blockView;
+
         self.blocks.remove(block);
-        BlockView.disableToolbar();
+        blockView.disableToolbar();
     };
 
     self.canAddBlock = function () {
@@ -34,20 +41,75 @@ function CardViewModel() {
         self.previewMode(true);
         $('body').scrollTo($(Data.header).outerHeight(true));
 
+        var blockView = Global.blockView;
+
         //TODO: redo this
-        BlockView.hideAllEditors();
+        blockView.hideAllEditors();
     };
 
     self.exitPreviewMode = function() {
         self.previewMode(false);
         $('body').scrollTo(0);
-    }
+    };
 
+    self.publishCard = function() {
+
+        var blockView = Global.blockView;
+        //TODO: redo this
+        blockView.hideAllEditors();
+
+        var data = {
+            card: {
+                coverId: ko.toJS(self.cover().id),
+                blocks: ko.toJS(self.blocks())
+            }
+        };
+        var infoMessageViewModel = Global.infoMessageViewModel;
+        var cardValidator = Global.cardValidator;
+
+        var validationResult = cardValidator.validate(data.card);
+
+        console.log(data);
+
+        if (validationResult.success == false) {
+            infoMessageViewModel.content(validationResult.msg);
+            infoMessageViewModel.show();
+            return;
+        }
+
+        data.card = JSON.stringify(data.card);
+
+        $.ajax({
+            url: Data.ajax.url,
+            type: 'post',
+            data: data,
+            complete: function() {
+            },
+            success: function(resultJSON) {
+                var resultData = JSON.parse(resultJSON);
+
+                if (resultData['success'] == true) {
+                    var postCreationWindowViewModel = Global.postCreationWindowViewModel;
+
+                    postCreationWindowViewModel.text(Data.info.card_publish_success);
+                    postCreationWindowViewModel.link(resultData['url']);
+                    postCreationWindowViewModel.show();
+                }
+                else {
+                    infoMessageViewModel.content(Data.info.card_publish_error);
+                    infoMessageViewModel.show();
+                }
+            },
+            error:function() {
+                infoMessageViewModel.content(Data.info.card_publish_error);
+                infoMessageViewModel.show();
+            }
+        });
+    };
 
     /* FOR DEBUGGING ONLY */
     self.save = function () {
-        self.lastSavedJson("");
-        self.lastSavedJson(JSON.stringify(ko.toJS(self), null, 2));
+        console.log(JSON.stringify(ko.toJS(self), null, 2));
     };
 
     self.lastSavedJson = ko.observable("");
@@ -72,6 +134,21 @@ ko.bindingHandlers.blockResizable = {
         (value == true) ? $(element).resizable('enable') : $(element).resizable('disable');
     }
 };
+
+ko.bindingHandlers.blockRotatable = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+
+        var handle = $(Data.card.block).find(Data.card.blockRotateButton);
+
+        $(element).rotatable({
+            angle: 0.000001,
+            handle: handle,
+            stop: function (event, angle) {
+                viewModel.position.angle(angle);
+            }
+        });
+    }
+}
 
 ko.bindingHandlers.blockDraggable = {
 
@@ -98,15 +175,15 @@ ko.bindingHandlers.blockDoubleClick = {
     update: function(element, valueAccessor) {
 
         var value = ko.unwrap(valueAccessor());
+        var blockView = Global.blockView;
+
+        $(element).unbind("dblclick");
 
         if (value == true) {
             //Show editor on doubleClick event
             $(element).on('dblclick', function () {
-                BlockView.showEditor(this);
+                blockView.showEditor(this);
             });
-        }
-        else {
-            $(element).unbind("dblclick");
         }
     }
 };
@@ -134,4 +211,4 @@ ko.bindingHandlers.slideToggle = {
     }
 };
 
-var CardViewModel = new CardViewModel();
+Global.cardViewModel = new CardViewModel();

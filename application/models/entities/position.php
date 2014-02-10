@@ -10,6 +10,7 @@ class Position
     private $y = 0;
     private $height = 0;
     private $width = 0;
+    private $angle = 0.0;
 
     public function __construct()
     {
@@ -81,7 +82,27 @@ class Position
             if (isset($position[FieldsNames::$JSON_POSITION_WIDTH])) {
                 $this->setWidth($position[FieldsNames::$JSON_POSITION_WIDTH]);
             }
+
+            if (isset($position[FieldsNames::$JSON_POSITION_ANGLE])) {
+                $this->setAngle($position[FieldsNames::$JSON_POSITION_ANGLE]);
+            }
         }
+    }
+
+    /**
+     * @param int $angle
+     */
+    public function setAngle($angle)
+    {
+        $this->angle = $angle;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAngle()
+    {
+        return $this->angle;
     }
 
     public function fromJSON($jsonString)
@@ -96,7 +117,8 @@ class Position
             FieldsNames::$JSON_POSITION_X => $this->x,
             FieldsNames::$JSON_POSITION_Y => $this->y,
             FieldsNames::$JSON_POSITION_HEIGHT => $this->height,
-            FieldsNames::$JSON_POSITION_WIDTH => $this->width
+            FieldsNames::$JSON_POSITION_WIDTH => $this->width,
+            FieldsNames::$JSON_POSITION_ANGLE => $this->angle
         );
 
         return json_encode($array);
@@ -107,7 +129,11 @@ class Position
         return " left: " . $this->x . "px ;" .
         " top: " . $this->y . "px ;" .
         " height: " . $this->height . "px ;" .
-        " width: " . $this->width . "px ;";
+        " width: " . $this->width . "px ;" .
+        "transform: rotate(" . $this->angle . "rad) ;" .
+        "-moz-transform: rotate(" . $this->angle . "rad) ;" .
+        "-webkit-transform: rotate(" . $this->angle . "rad) ;" .
+        "-o-transform: rotate(" . $this->angle . "rad) ;";
     }
 
     public function isDefault()

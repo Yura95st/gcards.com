@@ -1,0 +1,12 @@
+.ui-rotatable-handle {
+    font-size: 13px;
+    left: -15px;
+    opacity: 0.3;
+    position: inherit;
+    top: -15px;
+}
+
+.ui-rotatable-handle:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}

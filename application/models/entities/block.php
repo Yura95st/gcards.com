@@ -45,7 +45,8 @@ class Block
         if ($content != null) {
             //No longer, than 10000 chars
             $content = substr($content, 0, 10000);
-            $this->content = html_escape($content);
+            //TODO: validate html
+            $this->content = $content;//html_escape($content);
         }
     }
 
