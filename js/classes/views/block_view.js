@@ -2,7 +2,6 @@ function BlockView()
 {
     var self = this;
     var toolbar = $(Data.card.toolbar);
-    var cardViewModel = CardViewModel;
 
     self.init = function() {
         var cover = $(Data.card.cover);
@@ -17,6 +16,7 @@ function BlockView()
         self.hideAllEditors();
 
         var viewModel = ko.dataFor(block);
+        var cardViewModel = Global.cardViewModel;
 
         cardViewModel.editingBlock(viewModel);
 
@@ -32,6 +32,8 @@ function BlockView()
     };
 
     self.hideEditor = function(block) {
+        var cardViewModel = Global.cardViewModel;
+
         cardViewModel.editingBlock(null);
 
         var viewModel = ko.dataFor(block);
@@ -79,5 +81,5 @@ function BlockView()
     };
 }
 
-var BlockView = new BlockView();
-BlockView.init();
+Global.blockView = new BlockView();
+Global.blockView.init();

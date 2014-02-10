@@ -10,6 +10,9 @@ function ModalViewModel() {
     self.displayLoader = ko.observable(false);
     self.displayContent = ko.observable(false);
 
+    //Activate tooltip
+    $(Data.modal.content).find(Data.modal.closeButton).tooltip();
+
     self.show = function () {
         setPosition();
 
@@ -61,4 +64,4 @@ ko.bindingHandlers.fadeVisible = {
     }
 };
 
-var ModalViewModel = new ModalViewModel();
+Global.modalViewModel = new ModalViewModel();

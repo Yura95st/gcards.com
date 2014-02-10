@@ -6,23 +6,27 @@ function CoverPickerViewModel() {
     self.currentMenuItem = ko.observable(self.menuItems()[0]);
     self.covers = ko.observableArray(Data.values.coverPicker.covers[0]);
 
-    self.showPicker = function() {
+    self.show = function() {
+        var modalViewModel = Global.modalViewModel;
         var html = getCoverPicker();
 
-        ModalViewModel.content(html);
-        ModalViewModel.show();
+        modalViewModel.content(html);
+        modalViewModel.show();
 
         ko.applyBindings(self, $(Data.coverPicker.wrap)[0]);
     };
 
     self.showCovers = function(menuItem) {
         var index = self.menuItems.indexOf(menuItem);
+
         self.covers(Data.values.coverPicker.covers[index]);
         self.currentMenuItem(menuItem);
     };
 
     self.pickCover = function(cover) {
-        CardViewModel.cover(cover);
+        var cardViewModel = Global.cardViewModel;
+
+        cardViewModel.cover(cover);
     };
 
     var getCoverPicker = function() {
@@ -39,6 +43,19 @@ function CoverPickerViewModel() {
                 '</div>' +
             '</div>';
     };
+
+//    self.uploadCover = function () {
+//        $.ajaxFileUpload({
+//            url: 'http://127.0.0.1/gcards.com/card_controller/uploadCover/',
+//            secureuri: false,
+//            fileElementId: 'userfile',
+//            dataType: 'json',
+//            data: {},
+//            success: function (data, status) {
+//                alert("hello!");
+//            }
+//        });
+//    };
 };
 
-var CoverPickerViewModel = new CoverPickerViewModel();
+Global.coverPickerViewModel = new CoverPickerViewModel();

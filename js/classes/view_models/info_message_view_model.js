@@ -8,6 +8,10 @@ function InfoMessageViewModel() {
     self.show = function () {
         setPosition();
         self.displayMessage(true);
+
+        setTimeout(function() {
+            self.displayMessage(false);
+        }, 5000);
     };
 
     self.hide = function () {
@@ -22,4 +26,4 @@ function InfoMessageViewModel() {
     };
 }
 
-var InfoMessageViewModel = new InfoMessageViewModel();
+Global.infoMessageViewModel = new InfoMessageViewModel();
