@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 09, 2014 at 09:54 PM
+-- Generation Time: Feb 12, 2014 at 06:01 PM
 -- Server version: 5.5.33
 -- PHP Version: 5.5.3
 
@@ -30,7 +30,7 @@ USE `gcards`;
 
 CREATE TABLE `blocks` (
   `block_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `position` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  `position` varchar(5000) COLLATE utf8_unicode_ci NOT NULL,
   `content` varchar(10000) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`block_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
