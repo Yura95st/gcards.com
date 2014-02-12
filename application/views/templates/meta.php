@@ -5,6 +5,8 @@
 
     <title>gCards</title>
 
+    <?php echo link_tag('img/icon/favicon.ico', 'shortcut icon', 'image/ico'); ?>
+
     <?php echo link_tag('css/main.css'); ?>
     <?php echo link_tag('http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css'); ?>
 
