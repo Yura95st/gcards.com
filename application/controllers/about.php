@@ -10,12 +10,13 @@ class About extends CI_Controller
         parent::__construct();
 
         $this->output->enable_profiler(TRUE);
+        $this->load->model('processors/page_processor');
     }
 
     public function index()
     {
-        $this->load->view('templates/meta');
-        $this->load->view('templates/header');
+        //Load header view
+        $this->page_processor->loadHeader();
 
         $this->lang->load('about');//, 'russian');
         $data = array(
@@ -24,13 +25,7 @@ class About extends CI_Controller
         );
         $this->load->view('view_about', $data);
 
-        $this->lang->load('footer');//, 'russian');
-        $data = array(
-            'menu_main' => $this->lang->line('menu_main'),
-            'menu_create_card' => $this->lang->line('menu_create_card'),
-            'menu_about' => $this->lang->line('menu_about'),
-            'menu_send_feedback' => $this->lang->line('menu_send_feedback'),
-        );
-        $this->load->view('templates/footer', $data);
+        //Load footer view
+        $this->page_processor->loadFooter();
     }
 }

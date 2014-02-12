@@ -12,17 +12,18 @@ class Card_Controller extends CI_Controller
         //for debugging aims only
         $this->output->enable_profiler(TRUE);
 
+        $this->load->model('processors/page_processor');
         $this->load->model('processors/cover_processor');
         $this->load->model('processors/card_processor');
     }
 
     public function create()
     {
-        $this->load->view('templates/meta');
-        $this->load->view('templates/header');
+        //Load header view
+        $this->page_processor->loadHeader();
 
         //Load toolbar view
-        $this->load->view('templates/toolbar');
+        $this->page_processor->loadToolbar();
 
         //Load createCard view
         $this->load->view('view_create_card');
@@ -35,6 +36,11 @@ class Card_Controller extends CI_Controller
             'card_publish_success' => $this->lang->line('card_publish_success'),
             'cover_picker' => $this->lang->line('cover_picker'),
             'card_post_created_window' => $this->lang->line('card_post_created_window'),
+            'card_undefined' => $this->lang->line('card_undefined'),
+            'card_cover_unpicked' => $this->lang->line('card_cover_unpicked'),
+            'card_no_blocks' => $this->lang->line('card_no_blocks'),
+            'card_too_many_blocks' => $this->lang->line('card_too_many_blocks'),
+            'card_empty_blocks' => $this->lang->line('card_empty_blocks')
         );
 
         //Get all covers
@@ -53,17 +59,10 @@ class Card_Controller extends CI_Controller
         $this->load->view('templates/data_js', $data);
 
         //Load footer view
-        $this->lang->load('footer'); //, 'russian');
-
         $data = array(
-            'createPage' => true,
-            'menu_main' => $this->lang->line('menu_main'),
-            'menu_create_card' => $this->lang->line('menu_create_card'),
-            'menu_about' => $this->lang->line('menu_about'),
-            'menu_send_feedback' => $this->lang->line('menu_send_feedback'),
+            'isCreatePage' => true,
         );
-
-        $this->load->view('templates/footer', $data);
+        $this->page_processor->loadFooter($data);
     }
 
     public function view($cardHashCode = null)
@@ -77,24 +76,19 @@ class Card_Controller extends CI_Controller
             return;
         }
 
-        $this->load->view('templates/meta');
-        $this->load->view('templates/header');
+        //Load header view
+        $this->page_processor->loadHeader();
 
         $data = array(
             'card' => $card,
-            'isCreator' => true,
         );
         $this->load->view('view_view_card', $data);
 
-        $this->lang->load('footer'); //, 'russian');
+        //Load footer view
         $data = array(
-            'menu_main' => $this->lang->line('menu_main'),
-            'menu_create_card' => $this->lang->line('menu_create_card'),
-            'menu_about' => $this->lang->line('menu_about'),
-            'menu_send_feedback' => $this->lang->line('menu_send_feedback'),
+            'isCreatePage' => false,
         );
-
-        $this->load->view('templates/footer', $data);
+        $this->page_processor->loadFooter($data);
     }
 
     public function publish()
@@ -106,8 +100,6 @@ class Card_Controller extends CI_Controller
             show_404();
             exit();
         }
-
-        $this->lang->load('card_controller');
 
         $result_json = array('success' => false);
 
