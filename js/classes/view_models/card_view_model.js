@@ -5,6 +5,7 @@ function CardViewModel() {
     self.blocks = ko.observableArray(new Array());
     self.editingBlock = ko.observable(null);
     self.previewMode = ko.observable(false);
+    self.cardPublishedMode = ko.observable(false);
 
     self.addBlock = function () {
         var position = new Position();
@@ -94,6 +95,9 @@ function CardViewModel() {
                     postCreationWindowViewModel.text(Data.info.card_publish_success);
                     postCreationWindowViewModel.link(resultData['url']);
                     postCreationWindowViewModel.show();
+
+                    self.previewMode(true);
+                    self.cardPublishedMode(true);
                 }
                 else {
                     infoMessageViewModel.content(Data.info.card_publish_error);
@@ -203,11 +207,24 @@ ko.bindingHandlers.fadeImage = {
     }
 };
 
-ko.bindingHandlers.slideToggle = {
+ko.bindingHandlers.slideUpDown = {
     update: function(element, valueAccessor) {
         var value = ko.unwrap(valueAccessor());
 
         (value == true) ? $(element).slideUp() : $(element).slideDown();
+    }
+};
+
+ko.bindingHandlers.selectAll = {
+    init:function(element, valueAccessor) {
+        var value = ko.unwrap(valueAccessor());
+
+        (value == true) ? $(element).focus().select() : $(element).blur();
+    },
+    update: function(element, valueAccessor) {
+        var value = ko.unwrap(valueAccessor());
+
+        (value == true) ? $(element).focus().select() : $(element).blur();
     }
 };
 
