@@ -1,7 +1,6 @@
 function BlockView()
 {
     var self = this;
-    var toolbar = $(Data.card.toolbar);
 
     self.init = function() {
         var cover = $(Data.card.cover);
@@ -71,6 +70,8 @@ function BlockView()
     };
 
     var enableToolbar = function(enabled) {
+
+        var toolbar = $(Data.card.toolbar);
 
         if (enabled != true && enabled != false) {
             return;

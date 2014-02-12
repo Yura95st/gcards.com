@@ -46,7 +46,12 @@
 
         info: {
             card_publish_error: "<?php echo $card_publish_error; ?>",
-            card_publish_success: "<?php echo $card_publish_success; ?>"
+            card_publish_success: "<?php echo $card_publish_success; ?>",
+            card_undefined: "<?php echo $card_undefined; ?>",
+            card_cover_unpicked: "<?php echo $card_cover_unpicked; ?>",
+            card_no_blocks: "<?php echo $card_no_blocks; ?>",
+            card_too_many_blocks: "<?php echo $card_too_many_blocks; ?>",
+            card_empty_blocks: "<?php echo $card_empty_blocks; ?>"
         },
 
         values: {
@@ -93,7 +98,6 @@
 
             },
             cardPostCreatedWindow: {
-
                 header: "<?php echo $card_post_created_window['header']; ?>",
                 menu: [
                     <?php foreach ($card_post_created_window['menu'] as $item): ?>

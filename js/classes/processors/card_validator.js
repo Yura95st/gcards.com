@@ -9,11 +9,11 @@ function CardValidator() {
 
         if (!card) {
             result.success = false;
-            result.msg = "Card is undefined";
+            result.msg = Data.info.card_undefined;
         }
         else if (!validateCoverId(card.coverId)) {
             result.success = false;
-            result.msg = "CoverId is invalid";
+            result.msg = Data.info.card_cover_unpicked;
         }
         else if (!validateBlocks(card.blocks)) {
             result.success = false;
@@ -24,11 +24,11 @@ function CardValidator() {
 
     var validateBlocks = function(blocks) {
         if (!blocks || blocks.length == 0) {
-            result.msg = "There is no blocks on the card";
+            result.msg = Data.info.card_no_blocks;
             return false;
         }
         else if (blocks.length > 10) {
-            result.msg = "Too many blocks";
+            result.msg = Data.info.card_too_many_blocks;
             return false;
         }
         else {
@@ -46,7 +46,7 @@ function CardValidator() {
 
     var validateBlock = function(block) {
         if (block == false || block.content == "" || block.content == Data.values.defaultCard.block.content) {
-            result.msg = "There is an empty block";
+            result.msg = Data.info.card_empty_blocks;
             return false;
         }
 
