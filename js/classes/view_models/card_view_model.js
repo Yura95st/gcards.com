@@ -112,11 +112,11 @@ function CardViewModel() {
     };
 
     /* FOR DEBUGGING ONLY */
-    self.save = function () {
-        console.log(JSON.stringify(ko.toJS(self), null, 2));
-    };
-
-    self.lastSavedJson = ko.observable("");
+//    self.save = function () {
+//        console.log(JSON.stringify(ko.toJS(self), null, 2));
+//    };
+//
+//    self.lastSavedJson = ko.observable("");
 };
 
 ko.bindingHandlers.blockResizable = {

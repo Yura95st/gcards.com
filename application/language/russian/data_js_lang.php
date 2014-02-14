@@ -1,95 +1,95 @@
 <?php
-$lang['card_init_text'] = 'Double-click to edit';
+$lang['card_init_text'] = 'Для редактирования щелкните дважды';
 
-$lang['card_publish_error'] = 'Sorry, an error occurred. Please, try again later.';
-$lang['card_publish_success'] = 'Your card is successfully created! Share it.';
+$lang['card_publish_error'] = 'К сожалению, произошла ошибка. Пожалуйста, попробуйте позже.';
+$lang['card_publish_success'] = 'Ваша поздравительная открытка успешно создана! Поделитесь ею.';
 
-$lang['card_undefined'] = 'Card is undefined.';
-$lang['card_cover_unpicked'] = 'Please, pick cover.';
-$lang['card_no_blocks'] = 'Please, add at least one block at Your card.';
-$lang['card_too_many_blocks'] = 'There are too many blocks at Your card.';
-$lang['card_empty_blocks'] = 'Please, remove all empty blocks at Your card.';
+$lang['card_undefined'] = 'Открытка не задана.';
+$lang['card_cover_unpicked'] = 'Пожалуйста, выберите обложку.';
+$lang['card_no_blocks'] = 'Пожалуйста, добавьте хотя бы один блок на Вашу открытку.';
+$lang['card_too_many_blocks'] = 'Слишком много блоков на Вашей открытке.';
+$lang['card_empty_blocks'] = 'Пожалуйста, удалите все пустые блоки на Вашей открытке.';
 
 $lang['cover_picker'] = array(
 
-    'header' => 'Cover Picker',
+    'header' => 'Выбор обложки',
     'menu' => [
         array(
             'id' => 1,
-            'title' => "All"
+            'title' => "Все"
         ),
         array(
             'id' => 2,
-            'title' => "Birthday"
+            'title' => "День рождения"
         ),
         array(
             'id' => 3,
-            'title' => "Wedding"
+            'title' => "Свадьба"
         ),
         array(
             'id' => 4,
-            'title' => "Valentine’s Day"
+            'title' => "День св. Валентина"
         ),
         array(
             'id' => 5,
-            'title' => "Women’s Day"
+            'title' => "8 Марта"
         ),
         array(
             'id' => 6,
-            'title' => "Easter"
+            'title' => "Пасха"
         ),
         array(
             'id' => 7,
-            'title' => "Earth Day"
+            'title' => "День Земли"
         ),
         array(
             'id' => 8,
-            'title' => "Mother’s Day"
+            'title' => "День Матери"
         ),
         array(
             'id' => 9,
-            'title' => "Memorial Day"
+            'title' => "День памяти"
         ),
         array(
             'id' => 10,
-            'title' => "Flag Day"
+            'title' => "День Флага"
         ),
         array(
             'id' => 11,
-            'title' => "Independence Day"
+            'title' => "День Независимости"
         ),
         array(
             'id' => 12,
-            'title' => "Labor Day"
+            'title' => "День труда"
         ),
         array(
             'id' => 13,
-            'title' => "Halloween"
+            'title' => "Хэллоуин"
         ),
         array(
             'id' => 14,
-            'title' => "Veterans Day"
+            'title' => "День ветеранов"
         ),
         array(
             'id' => 15,
-            'title' => "Thanksgiving"
+            'title' => "День благодарения"
         ),
         array(
             'id' => 16,
-            'title' => "Christmas Day"
+            'title' => "Рождество"
         ),
         array(
             'id' => 17,
-            'title' => "New Year’s Day"
+            'title' => "Новый год"
         )]
 );
 
 $lang['card_post_created_window'] = array(
 
-    'header' => 'Card is created',
+    'header' => 'Открытка создана',
     'menu' => array(
 //        'Share', 'Options'
-        'Share'
+        'Поделиться'
     )
 );
 

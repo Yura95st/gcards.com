@@ -15,7 +15,7 @@ $lang['tools_hot_keys'] = "Помощь";
 $lang['tools_size_color'] = "Размер и цвет";
 $lang['tools_alignment'] = "Выравнивание";
 $lang['tools_resize'] = "Растянуть";
-$lang['tools_drag'] = "Тащить";
+$lang['tools_drag'] = "Перетащить";
 $lang['tools_rotate'] = "Вращать";
 
 $lang['demo_slide_middle_card_header'] = "Большой выбор обложек";

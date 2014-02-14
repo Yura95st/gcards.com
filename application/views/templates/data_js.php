@@ -67,7 +67,7 @@
                         x: 10,
                         y: 10,
                         height: 75,
-                        width: 400,
+                        width: 420,
                         angle: 0.0
                     }
                 }

@@ -5,7 +5,7 @@
             <?php echo $button_add_block; ?>
         </button>
 
-        <button class="btn btn-default toolbar-button" data-bind='click: cardViewModel.save'>Save to JSON</button>
+<!--        <button class="btn btn-default toolbar-button" data-bind='click: cardViewModel.save'>Save to JSON</button>-->
 
     </div>
 
