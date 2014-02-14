@@ -17,11 +17,12 @@
             cover: '.card-cover',
             editor: '.note-editor',
             editable: '.note-editable',
-            toolbar: '.editor-toolbar'
+            toolbar: '.editor-toolbar',
+            publishButton: '.card-publish-button'
         },
 
         ajax: {
-            progress: '.progress',
+            loader: '<img src="<?php echo base_url(); ?>img/loader/google_loader_small.gif" />',
             url: '<?php echo base_url(); ?>card_controller/publish/'
         },
 
@@ -89,7 +90,8 @@
                         {
                             id: <?php echo $cover->getId(); ?>,
                             mini: "<?php echo base_url().  $cover->getPathMini(); ?>",
-                            original: "<?php echo base_url(). $cover->getPathOriginal(); ?>"
+                            original: "<?php echo base_url(). $cover->getPathOriginal(); ?>",
+                            partitionId: "<?php echo base_url(). $cover->getPartitionId(); ?>"
                         },
                         <?php endforeach; ?>
                     ],

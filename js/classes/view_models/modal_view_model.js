@@ -9,6 +9,7 @@ function ModalViewModel() {
     self.displayMask = ko.observable(false);
     self.displayLoader = ko.observable(false);
     self.displayContent = ko.observable(false);
+    self.displayCloseButton = ko.observable(true);
 
     //Activate tooltip
     $(Data.modal.content).find(Data.modal.closeButton).tooltip();
@@ -27,6 +28,7 @@ function ModalViewModel() {
         self.displayLoader(false);
         self.content("");
         self.displayContent(false);
+        self.displayCloseButton(true);
     };
 
     var setPosition = function() {

@@ -15,7 +15,7 @@
         <button class="btn btn-default toolbar-button" data-bind='click: cardViewModel.preview'>
             <?php echo $button_preview; ?>
         </button>
-        <button class="btn btn-danger toolbar-button" data-bind='click: cardViewModel.publishCard'>
+        <button class="btn btn-danger toolbar-button card-publish-button" data-bind='click: cardViewModel.publishCard'>
             <?php echo $button_publish; ?>
         </button>
     </div>
@@ -29,7 +29,7 @@
         <button class="btn btn-default" data-bind='click: cardViewModel.exitPreviewMode'>
             <?php echo $button_back_to_editing; ?>
         </button>
-        <button class="btn btn-danger" data-bind='click: cardViewModel.publishCard'>
+        <button class="btn btn-danger card-publish-button" data-bind='click: cardViewModel.publishCard'>
             <?php echo $button_publish; ?>
         </button>
     </div>

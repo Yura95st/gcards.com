@@ -84,9 +84,16 @@ function CardViewModel() {
             url: Data.ajax.url,
             type: 'post',
             data: data,
+            beforeSend: function() {
+                showAjaxLoader(true);
+                disablePublishCard(true);
+            },
             complete: function() {
+                disablePublishCard(false);
             },
             success: function(resultJSON) {
+                showAjaxLoader(false);
+
                 var resultData = JSON.parse(resultJSON);
 
                 if (resultData['success'] == true) {
@@ -105,10 +112,28 @@ function CardViewModel() {
                 }
             },
             error:function() {
+                showAjaxLoader(false);
                 infoMessageViewModel.content(Data.info.card_publish_error);
                 infoMessageViewModel.show();
             }
         });
+    };
+
+    var disablePublishCard = function(disable) {
+        $(Data.card.publishButton).each(function() {
+            $(this).prop("disabled", disable);
+        });
+    }
+
+    var showAjaxLoader = function(show) {
+        if (show) {
+            Global.modalViewModel.content(Data.ajax.loader);
+            Global.modalViewModel.displayCloseButton(false);
+            Global.modalViewModel.show();
+        }
+        else {
+            Global.modalViewModel.hide();
+        }
     };
 
     /* FOR DEBUGGING ONLY */
