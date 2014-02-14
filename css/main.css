@@ -175,6 +175,10 @@ a:hover {
     background: url("../img/frameworks_logo/bootstrap_logo.png") repeat scroll 0 0 transparent;
     width: 186px;
 }
+#footer .language-bar {
+    float: right;
+    margin: 18px 10px 0 0;
+}
 
 /* MAIN BODY */
 .main-body {
@@ -207,21 +211,196 @@ a:hover {
     background: #4285f4;
 }
 .content-slides.first .image {
-    background: url("../img/pics_main/first.png") repeat scroll 0 0 transparent;
+    background: url("../img/slides_main/confusion.jpg") repeat scroll 0 0 transparent;
 }
 .content-slides.second .content {
     background-color: #FCCA03;
 }
-.content-slides.second .image {
-    background: url("../img/pics_main/second.png") repeat scroll 0 0 transparent;
-}
-.content-slides.third .content {
+.content-slides.secondthird .content {
     background-color: #16A61E;
 }
-.content-slides.third .image {
-    /*background: url("../img/pics_main/third.png") repeat scroll 0 0 transparent;*/
+.demo-slide-wrap {
+    background-color: #eef1f5;
+    border-top: 1px solid #dbdde1;
+    font-family: Helvetica, Arial, sans-serif;
+    padding: 30px 0;
+    -webkit-font-smoothing: antialiased;
 }
-
+.demo-slide {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+.demo-slide .demo-slide-header h2, .demo-slide .demo-slide-header h3 {
+    color: #495b67;
+    font-weight: 300;
+    line-height: 1.5;
+    margin: 10px 0;
+    text-align: center;
+}
+.demo-slide .demo-slide-header h2 {
+    font-size: 32px;
+    font-weight: 600;
+}
+.demo-slide .demo-slide-header h3 {
+    color: #666;
+    font-size: 20px;
+}
+.demo-slide .cards {
+    margin: 50px 0 0;
+    overflow: hidden;
+    padding: 0 5px 5px;
+}
+.demo-slide .cards .color-card {
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    -webkit-box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.07);
+    -moz-box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.07);
+    box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.07);
+    border-top: none;
+    display: block;
+    float: left;
+    position: relative;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    width: 30%;
+    min-height: 300px;
+    margin-top: 50px;
+}
+.demo-slide .cards .color-card:before {
+    content: "";
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    -ms-border-radius: 4px 4px 0 0;
+    -o-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    background-color: #fedd8c;
+    border-top: 1px solid #fedd8c;
+    border-left: 1px solid #fedd8c;
+    border-right: 1px solid #fedd8c;
+    display: block;
+    height: 8px;
+}
+.demo-slide .cards .right-card {
+    left: -2%;
+}
+.demo-slide .cards .right-card .link-icon {
+    display: block;
+    font-size: 100px;
+    margin: 0 auto;
+    padding: 30px 0 0;
+}
+.demo-slide .cards .middle-card {
+    left: -1%;
+    margin-top: 0;
+    min-height: 370px;
+    padding: 0 0 15px;
+    width: 40%;
+    z-index: 100;
+}
+.demo-slide .cards .color-card h4 {
+    font-weight: 600;
+    margin: 20px 0 0;
+    text-align: center;
+}
+.demo-slide .cards .color-card p {
+    margin: 10px 32px;
+    text-align: center;
+}
+.demo-slide .cards .color-card a:hover {
+    text-decoration: none;
+}
+.demo-slide .cards .middle-card .imac-screen {
+    background: url("../img/slides_main/imac_screen.png") repeat scroll 0 0 transparent;
+    height: 319px;
+    margin: 5px 14px 10px;
+    width: 400px;
+}
+.demo-slide .cards .middle-card .imac-screen .cover-thumbnail {
+    display: block;
+    padding: 38px 0 0 17px;
+}
+.demo-slide .cards .middle-card .create-card-button {
+    display: block;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0 auto;
+    padding: 10px 25px;
+}
+.demo-slide .cards .left-card .controls {
+    margin: 10px 32px;
+    overflow: hidden;
+}
+.demo-slide .cards .left-card .controls .image {
+    background-image: url("../img/slides_main/font_panel.png");
+    height: 30px;
+    margin: 0 auto;
+}
+.demo-slide .cards .left-card .controls .control {
+    float: left;
+}
+.demo-slide .cards .left-card .controls .control .text {
+    text-align: center;
+}
+.demo-slide .cards .left-card .controls .control.headers {
+    margin: 0 15px 0 0;
+}
+.demo-slide .cards .left-card .controls .control.headers .image {
+    background-position: 0px 0px;
+    width: 45px;
+}
+.demo-slide .cards .left-card .controls .control.style {
+    margin: 0 5px 0 0;
+}
+.demo-slide .cards .left-card .controls .control.style .image {
+    background-position: -49px 0px;
+    width: 126px;
+}
+.demo-slide .cards .left-card .controls .control.size-color {
+    margin: 20px 35px 0 0;
+}
+.demo-slide .cards .left-card .controls .control.size-color .image {
+    background-position: -178px 0px;
+    width: 105px;
+}
+.demo-slide .cards .left-card .controls .control.alignment {
+    margin: 20px 0 0;
+}
+.demo-slide .cards .left-card .controls .control.alignment .image {
+    background-position: -287px 0px;
+        width: 99px;
+}
+.demo-slide .cards .left-card .controls .control.hot-keys .image {
+    background-position: -427px 0px;
+    width: 30px;
+}
+.demo-slide .cards .left-card .controls .control.resize {
+    margin: 20px 0 0 0;
+    width: 68px;
+}
+.demo-slide .cards .left-card .controls .control.resize .image {
+    background-position: -459px 0px;
+    width: 29px;
+}
+.demo-slide .cards .left-card .controls .control.drag {
+    margin: 20px 0 0;
+    width: 128px;
+}
+.demo-slide .cards .left-card .controls .control.drag .image {
+    background-position: -491px 0px;
+    width: 28px;
+}
+.demo-slide .cards .left-card .controls .control.rotate {
+    margin: 20px 0 0;
+    float: right;
+    width: 59px;
+}
+.demo-slide .cards .left-card .controls .control.rotate .image {
+    background-position: -523px 0px;
+    width: 24px;
+}
 /* AUTHOR BODY */
 .author-body {
 
