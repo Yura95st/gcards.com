@@ -3,14 +3,18 @@ function MacScreenViewModel() {
     var thumbnailsArray = [
         'img/slides_main/thumbnails/birthday.jpg',
         'img/slides_main/thumbnails/birthday_2.jpg',
-        'img/slides_main/thumbnails/heavenly_love.jpg',
+        'img/slides_main/thumbnails/birthday_3.jpg',
+        'img/slides_main/thumbnails/birthday_4.jpg',
+        'img/slides_main/thumbnails/wedding.jpg',
+        'img/slides_main/thumbnails/wedding_2.jpg',
+        'img/slides_main/thumbnails/wedding_3.jpg',
         'img/slides_main/thumbnails/valentines_day.jpg',
         'img/slides_main/thumbnails/valentines_day_2.jpg',
         'img/slides_main/thumbnails/valentines_day_3.jpg',
-        'img/slides_main/thumbnails/new_year_2.jpg',
-        'img/slides_main/thumbnails/new_year_3.jpg',
-        'img/slides_main/thumbnails/new_year_4.jpg',
-        'img/slides_main/thumbnails/new_year.jpg'
+        'img/slides_main/thumbnails/christmas.jpg',
+        'img/slides_main/thumbnails/christmas_2.jpg',
+        'img/slides_main/thumbnails/new_year.jpg',
+        'img/slides_main/thumbnails/new_year_2.jpg'
     ];
     self.counter = 0;
     self.thumbnail = ko.observable(thumbnailsArray[0]);
