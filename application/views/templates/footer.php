@@ -4,7 +4,7 @@
     <ul class="navigation_bar">
         <li><a href="<?php echo base_url(); ?>"><?php echo $menu_main; ?></a></li>
         <li><a href="<?php echo base_url(); ?>card_controller/create"><?php echo $menu_create_card; ?></a></li>
-        <li><a href="<?php echo base_url(); ?>about"><?php echo $menu_about; ?></a></li>
+<!--        <li><a href="--><?php //echo base_url(); ?><!--about">--><?php //echo $menu_about; ?><!--</a></li>-->
     </ul>
 
 <!--    <div class="language-bar" id="change_lang_select">-->
@@ -35,7 +35,7 @@
     <div class="mask" data-bind="fadeVisible: modalViewModel.displayMask, style { height: modalViewModel.maskHeight() + 'px'}"></div>
     <div class="loader" data-bind="visible: modalViewModel.displayLoader"></div>
     <div class="content-wrap" data-bind="visible: modalViewModel.displayContent, style { left: modalViewModel.contentX() + 'px', top: modalViewModel.contentY() + 'px'}">
-        <span class="glyphicon glyphicon-remove close-button" data-bind="click: modalViewModel.hide" data-toggle="tooltip" data-placement="top" title="Close"></span>
+        <span class="glyphicon glyphicon-remove close-button" data-bind="visible: modalViewModel.displayCloseButton, click: modalViewModel.hide" data-toggle="tooltip" data-placement="top" title="Close"></span>
         <div class="content" data-bind="html: modalViewModel.content"></div>
     </div>
 </div>

@@ -33,7 +33,7 @@ class Cover_Processor extends CI_Model
     {
         $cover = null;
 
-// coverId int value is in range of : min = 1, max = 999999
+        // coverId int value is in range of : min = 1, max = 999999
         if (Validation::isInteger($coverId, 1, 999999)) {
             $sql = " SELECT " . FieldsNames::$COVERS_ID . "," . FieldsNames::$COVERS_PARTITION_ID . "," .
                 FieldsNames::$COVERS_PATH_ORIGINAL . "," . FieldsNames::$COVERS_PATH_MINI . "," .

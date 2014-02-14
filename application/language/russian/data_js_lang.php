@@ -15,8 +15,12 @@ $lang['cover_picker'] = array(
     'header' => 'Выбор обложки',
     'menu' => [
         array(
-            'id' => 1,
+            'id' => 0,
             'title' => "Все"
+        ),
+        array(
+            'id' => 1,
+            'title' => "Рождество"
         ),
         array(
             'id' => 2,
@@ -76,10 +80,6 @@ $lang['cover_picker'] = array(
         ),
         array(
             'id' => 16,
-            'title' => "Рождество"
-        ),
-        array(
-            'id' => 17,
             'title' => "Новый год"
         )]
 );

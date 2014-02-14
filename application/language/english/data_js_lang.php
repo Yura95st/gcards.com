@@ -15,8 +15,12 @@ $lang['cover_picker'] = array(
     'header' => 'Cover Picker',
     'menu' => [
         array(
-            'id' => 1,
+            'id' => 0,
             'title' => "All"
+        ),
+        array(
+            'id' => 1,
+            'title' => "Christmas Day"
         ),
         array(
             'id' => 2,
@@ -76,12 +80,9 @@ $lang['cover_picker'] = array(
         ),
         array(
             'id' => 16,
-            'title' => "Christmas Day"
-        ),
-        array(
-            'id' => 17,
             'title' => "New Year’s Day"
-        )]
+        )
+    ]
 );
 
 $lang['card_post_created_window'] = array(

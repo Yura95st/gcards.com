@@ -47,9 +47,9 @@ class Card_Controller extends CI_Controller
             'card_empty_blocks' => $this->lang->line('card_empty_blocks')
         );
 
-        //Get all covers
+        //Get all visible to all covers
         $coversArray = array();
-        $allCovers = $this->cover_processor->getAllCovers();
+        $allCovers = $this->cover_processor->getAllVisibleCovers();
 
         array_push($coversArray, $allCovers);
 
@@ -128,9 +128,9 @@ class Card_Controller extends CI_Controller
 //        return true;
 //    }
 
-    public function newCovers()
-    {
-        $this->output->enable_profiler(true);
-        $this->cover_processor->createNewCoversFromFiles();
-    }
+//    public function newCovers()
+//    {
+//        $this->output->enable_profiler(true);
+//        $this->cover_processor->createNewCoversFromFiles();
+//    }
 }

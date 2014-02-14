@@ -1,10 +1,11 @@
 function CoverPickerViewModel() {
     var self = this;
+    var coversArray = Data.values.coverPicker.covers;
 
     self.header = Data.values.coverPicker.header;
     self.menuItems = ko.observableArray(Data.values.coverPicker.menu);
     self.currentMenuItem = ko.observable(self.menuItems()[0]);
-    self.covers = ko.observableArray(Data.values.coverPicker.covers[0]);
+    self.covers = ko.observableArray(coversArray[0]);
 
     self.show = function() {
         var modalViewModel = Global.modalViewModel;
@@ -17,9 +18,9 @@ function CoverPickerViewModel() {
     };
 
     self.showCovers = function(menuItem) {
-        var index = self.menuItems.indexOf(menuItem);
+        var id = menuItem.id;
 
-        self.covers(Data.values.coverPicker.covers[index]);
+        self.covers(coversArray[id]);
         self.currentMenuItem(menuItem);
     };
 
