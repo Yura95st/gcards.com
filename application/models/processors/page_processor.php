@@ -21,15 +21,17 @@ class Page_Processor extends CI_Model
     public function loadFooter($data = array())
     {
         $isCreatePage = isset($data['isCreatePage']) ? $data['isCreatePage'] : false;
+        $isMainPage = isset($data['isMainPage']) ? $data['isMainPage'] : false;
 
         $this->lang->load('footer'); //, 'russian');
 
         $data = array(
             'createPage' => $isCreatePage,
+            'mainPage' => $isMainPage,
             'menu_main' => $this->lang->line('menu_main'),
             'menu_create_card' => $this->lang->line('menu_create_card'),
             'menu_about' => $this->lang->line('menu_about'),
-            'menu_send_feedback' => $this->lang->line('menu_send_feedback'),
+            'menu_send_feedback' => $this->lang->line('menu_send_feedback')
         );
 
         $this->load->view('templates/footer', $data);

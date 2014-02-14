@@ -37,13 +37,10 @@ function PostCreationWindowViewModel() {
                     '<div class="item" data-bind="text: item.title, click: postCreationWindowViewModel.showOperation, css: {\'active\': item === postCreationWindowViewModel.currentMenuItem()}"></div>' +
                 '</div>' +
                 '<div class="operations">' +
-                    '<div class="item" data-bind="slideToggle: 0 != postCreationWindowViewModel.currentOperation()">' +
-                        '<input type="text" data-bind="value: postCreationWindowViewModel.link" />' +
+                    '<div class="item" data-bind="slideUpDown: 0 != postCreationWindowViewModel.currentOperation()">' +
+                        '<input type="text" class="url" data-bind="selectAll: 0 == postCreationWindowViewModel.currentOperation(), value: postCreationWindowViewModel.link" />' +
                     '</div>' +
                 '<div class="item" data-bind="slideToggle: 1 != postCreationWindowViewModel.currentOperation()">' +
-                        '<div>Share</div>' +
-                    '</div>' +
-                '<div class="item" data-bind="slideToggle: 2 != postCreationWindowViewModel.currentOperation()">' +
                         '<div>Options</div>' +
                     '</div>' +
                 '</div>' +

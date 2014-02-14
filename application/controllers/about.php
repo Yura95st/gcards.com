@@ -9,7 +9,13 @@ class About extends CI_Controller
         //Call the Controller constructor
         parent::__construct();
 
-        $this->output->enable_profiler(TRUE);
+        //for debugging aims only
+        //$this->output->enable_profiler(TRUE);
+
+        //Set Language
+        $this->load->model('processors/lang_processor');
+        $this->lang_processor->setLanguage();
+
         $this->load->model('processors/page_processor');
     }
 

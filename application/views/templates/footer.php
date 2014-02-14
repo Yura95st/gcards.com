@@ -7,6 +7,13 @@
         <li><a href="<?php echo base_url(); ?>about"><?php echo $menu_about; ?></a></li>
     </ul>
 
+<!--    <div class="language-bar" id="change_lang_select">-->
+<!--        <select onchange="Global.language.change(this)">-->
+<!--            <option value="en">English</option>-->
+<!--            <option value="ru">Russian</option>-->
+<!--        </select>-->
+<!--    </div>-->
+
     <div class="frameworks-logo-wrap">
         <a href="http://jquery.com/" target="_blank" title="jQuery">
             <div class="framework-logo jquery-logo"></div>
@@ -38,10 +45,11 @@
     <div class="content" data-bind="html: infoMessageViewModel.content"></div>
 </div>
 
+<!--<script type='text/javascript' src='--><?php //echo base_url(); ?><!--js/classes/processors/lang_processor.js'></script>-->
+
 <?php if (isset($createPage) && $createPage === true): ?>
 
 <!-- Libraries import -->
-<script type='text/javascript' src='<?php echo base_url(); ?>js/libraries/knockout-3.0.0.js'></script>
 <script type='text/javascript' src='http://code.jquery.com/ui/1.10.4/jquery-ui.js'></script>
 <script type='text/javascript' src='<?php echo base_url(); ?>js/libraries/jquery_scroll_to.js'></script>
 <script type='text/javascript' src='<?php echo base_url(); ?>js/libraries/jquery_rotatable.js'></script>
@@ -70,4 +78,8 @@
 <!-- Views import -->
 <script type='text/javascript' src='<?php echo base_url(); ?>js/classes/views/block_view.js'></script>
 
+<?php endif; ?>
+
+<?php if (isset($mainPage) && $mainPage === true): ?>
+<script type='text/javascript' src='<?php echo base_url(); ?>js/classes/view_models/mac_screen_view_model.js'></script>
 <?php endif; ?>

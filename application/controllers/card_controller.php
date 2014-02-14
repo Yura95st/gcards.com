@@ -10,7 +10,11 @@ class Card_Controller extends CI_Controller
         parent::__construct();
 
         //for debugging aims only
-        $this->output->enable_profiler(TRUE);
+        //$this->output->enable_profiler(TRUE);
+
+        //Set Language
+        $this->load->model('processors/lang_processor');
+        $this->lang_processor->setLanguage();
 
         $this->load->model('processors/page_processor');
         $this->load->model('processors/cover_processor');

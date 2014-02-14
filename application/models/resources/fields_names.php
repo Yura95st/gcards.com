@@ -41,4 +41,7 @@ class FieldsNames
     //JSON Card fields
     public static $JSON_CARDS_BLOCKS = "blocks";
     public static $JSON_CARDS_COVER_ID = "coverId";
+
+    //Post Language fields
+    public static $SESSION_LANG = "lang";
 }
