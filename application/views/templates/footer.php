@@ -7,12 +7,15 @@
 <!--        <li><a href="--><?php //echo base_url(); ?><!--about">--><?php //echo $menu_about; ?><!--</a></li>-->
     </ul>
 
-<!--    <div class="language-bar" id="change_lang_select">-->
-<!--        <select onchange="Global.language.change(this)">-->
-<!--            <option value="en">English</option>-->
-<!--            <option value="ru">Russian</option>-->
-<!--        </select>-->
-<!--    </div>-->
+    <div class="language-bar" id="change_lang_select">
+        <select onchange="Global.language.change(this)">
+            <?php foreach ($lang_array as $lang_code => $lang_value) {
+
+                printf('<option %s value="%s">%s</option>',
+                    ($current_lang_code == $lang_code) ? 'selected' : '' , $lang_code, $lang_value);
+            } ?>
+        </select>
+    </div>
 
     <div class="frameworks-logo-wrap">
         <a href="http://jquery.com/" target="_blank" title="jQuery">
@@ -30,6 +33,8 @@
     </div>
 </div>
 
+<?php if (isset($createPage) && $createPage === true): ?>
+
 <!-- Modal -->
 <div id="modal">
     <div class="mask" data-bind="fadeVisible: modalViewModel.displayMask, style { height: modalViewModel.maskHeight() + 'px'}"></div>
@@ -44,10 +49,6 @@
 <div id="info-message" data-bind="fadeVisible: infoMessageViewModel.displayMessage, style { left: infoMessageViewModel.positionX() + 'px'}">
     <div class="content" data-bind="html: infoMessageViewModel.content"></div>
 </div>
-
-<!--<script type='text/javascript' src='--><?php //echo base_url(); ?><!--js/classes/processors/lang_processor.js'></script>-->
-
-<?php if (isset($createPage) && $createPage === true): ?>
 
 <!-- Libraries import -->
 <script type='text/javascript' src='http://code.jquery.com/ui/1.10.4/jquery-ui.js'></script>
@@ -70,6 +71,7 @@
 <script type='text/javascript' src='<?php echo base_url(); ?>js/classes/view_models/cover_picker_view_model.js'></script>
 <script type='text/javascript' src='<?php echo base_url(); ?>js/classes/view_models/post_creation_window_view_model.js'></script>
 
+<!-- Main ViewModel import -->
 <script type='text/javascript' src='<?php echo base_url(); ?>js/classes/view_models/main_view_model.js'></script>
 
 <!-- Processors import -->
@@ -80,6 +82,12 @@
 
 <?php endif; ?>
 
+
 <?php if (isset($mainPage) && $mainPage === true): ?>
-<script type='text/javascript' src='<?php echo base_url(); ?>js/classes/view_models/mac_screen_view_model.js'></script>
+    <!-- Mac screen ViewModel  import -->
+    <script type='text/javascript' src='<?php echo base_url(); ?>js/classes/view_models/mac_screen_view_model.js'></script>
+
 <?php endif; ?>
+
+<!-- Lang processor import -->
+<script type='text/javascript' src='<?php echo base_url(); ?>js/classes/processors/lang_processor.js'></script>

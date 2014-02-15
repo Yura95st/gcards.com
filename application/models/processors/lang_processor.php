@@ -10,8 +10,9 @@ class Lang_Processor extends CI_Model
     private $defaultLangCode = 'en';
     private $langArray = array(
         'en' => 'english',
+        'es' => 'spanish',
         'ru' => 'russian',
-        'ua' => 'russian'
+        'ua' => 'ukrainian'
     );
     private $LANG_FIELD = 'lang';
 

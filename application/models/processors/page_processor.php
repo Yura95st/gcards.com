@@ -2,6 +2,8 @@
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once(APPPATH . 'models/resources/fields_names.php');
+
 class Page_Processor extends CI_Model
 {
     function __construct()
@@ -10,6 +12,7 @@ class Page_Processor extends CI_Model
         parent::__construct();
 
         $this->load->model('processors/cover_processor');
+        $this->load->library('session');
     }
 
     public function loadHeader()
@@ -23,7 +26,7 @@ class Page_Processor extends CI_Model
         $isCreatePage = isset($data['isCreatePage']) ? $data['isCreatePage'] : false;
         $isMainPage = isset($data['isMainPage']) ? $data['isMainPage'] : false;
 
-        $this->lang->load('footer'); //, 'russian');
+        $this->lang->load('footer');
 
         $data = array(
             'createPage' => $isCreatePage,
@@ -31,7 +34,9 @@ class Page_Processor extends CI_Model
             'menu_main' => $this->lang->line('menu_main'),
             'menu_create_card' => $this->lang->line('menu_create_card'),
             'menu_about' => $this->lang->line('menu_about'),
-            'menu_send_feedback' => $this->lang->line('menu_send_feedback')
+            'menu_send_feedback' => $this->lang->line('menu_send_feedback'),
+            'lang_array' => $this->lang->line('lang_array'),
+            'current_lang_code' => $this->session->userdata(FieldsNames::$SESSION_LANG)
         );
 
         $this->load->view('templates/footer', $data);
@@ -39,7 +44,7 @@ class Page_Processor extends CI_Model
 
     public function loadToolbar()
     {
-        $this->lang->load('toolbar');//, 'russian');
+        $this->lang->load('toolbar');
 
         $data = array(
             'button_pick_cover' => $this->lang->line('button_pick_cover'),

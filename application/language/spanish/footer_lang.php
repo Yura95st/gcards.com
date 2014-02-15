@@ -1,8 +1,8 @@
 <?php
 
-$lang['menu_main'] = "Главная";
-$lang['menu_create_card'] = "Создать открытку";
-$lang['menu_about'] = "Об авторе";
+$lang['menu_main'] = "Principal";
+$lang['menu_create_card'] = "Crear la tarjeta";
+$lang['menu_about'] = "Acerca de";
 
 $lang['lang_array'] = array(
     'en' => 'English',
