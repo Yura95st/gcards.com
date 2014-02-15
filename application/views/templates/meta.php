@@ -15,6 +15,10 @@
     <?php echo link_tag('css/summernote.css'); ?>
     <?php echo link_tag('css/jquery.ui.rotatable.css'); ?>
 
+    <!-- Libraries import -->
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script type='text/javascript' src='<?php echo base_url(); ?>js/libraries/knockout-3.0.0.js'></script>
+
+    <!-- Data file import -->
+    <script type='text/javascript' src='<?php echo base_url(); ?>js/classes/models/data.js'></script>
 </head>
