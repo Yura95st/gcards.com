@@ -13,7 +13,7 @@ $lang['card_empty_blocks'] = 'Будь ласка, видаліть всі по�
 $lang['cover_picker'] = array(
 
     'header' => 'Вибір обкладинки',
-    'menu' => [
+    'menu' => array(
         array(
             'id' => 0,
             'title' => "Всі"
@@ -81,7 +81,8 @@ $lang['cover_picker'] = array(
         array(
             'id' => 16,
             'title' => "Новий рік"
-        )]
+        )
+    )
 );
 
 $lang['card_post_created_window'] = array(

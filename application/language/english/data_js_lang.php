@@ -13,7 +13,7 @@ $lang['card_empty_blocks'] = 'Please, remove all empty blocks at Your card.';
 $lang['cover_picker'] = array(
 
     'header' => 'Cover Picker',
-    'menu' => [
+    'menu' => array(
         array(
             'id' => 0,
             'title' => "All"
@@ -82,7 +82,7 @@ $lang['cover_picker'] = array(
             'id' => 16,
             'title' => "New Year’s Day"
         )
-    ]
+    )
 );
 
 $lang['card_post_created_window'] = array(
