@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>gCards</title>
+    <title><?php echo $title; ?></title>
 
     <?php echo link_tag('img/icon/favicon.ico', 'shortcut icon', 'image/ico'); ?>
 

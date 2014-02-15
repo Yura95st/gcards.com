@@ -17,7 +17,13 @@ class Page_Processor extends CI_Model
 
     public function loadHeader()
     {
-        $this->load->view('templates/meta');
+        $this->lang->load('meta');
+
+        $data = array(
+            'title' => $this->lang->line('title'),
+        );
+
+        $this->load->view('templates/meta', $data);
         $this->load->view('templates/header');
     }
 
